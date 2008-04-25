@@ -1,0 +1,229 @@
+#!/bin/bash
+
+BASE=../relacs/trunk/
+
+# directories and descriptions of plugin sets:
+PLUGINSETS="hardware:Hardware common:Common auditory:Auditory patch:Patch-Clamp"
+
+SAVEIFS="$IFS"
+
+# link to documentation:
+cd web/doc
+ln -f -s ../../${BASE}doc/html reference
+cd -
+
+# NEWS in index.html:
+FILE="${BASE}NEWS"
+IFS=""
+while read LINE; do
+    if [ $(expr match "$LINE" "INSERTNEWS.*") -gt 0 ]; then
+	COUNT=0
+        DDOPEN="no"
+	while read CLINE; do
+	    if [ $(expr match "$CLINE" "\w.*") -gt 0 ]; then
+		[ $COUNT -gt 1 ] && break;
+		if [ $DDOPEN = "yes" ]; then
+		    echo "    </dd>"
+		    echo ""
+		    DDOPEN="no"
+		fi
+		echo "    <dt>$CLINE</dt>"
+		echo "    <dd>"
+		DDOPEN="yes"
+		let COUNT+=1
+	    else
+		[ $(expr match "$CLINE" ".*\w.*") -gt 0 ] && echo "    $CLINE"
+	    fi
+	done < $FILE
+	[ $DDOPEN = "yes" ] && echo "    </dd>"
+    else
+	echo "$LINE"
+    fi
+done < web/index.tmpl > web/index.html
+IFS="$SAVEIFS"
+
+# README, INSTALL:
+for FILE in ${BASE}README ${BASE}INSTALL; do
+    WEB=$(echo $FILE | tr [:upper:] [:lower:])
+    WEB=${WEB##*/}
+    IFS=""
+    while read LINE; do
+	echo "$LINE"
+	if [ $(expr match "$LINE" ".*<pre>.*") -gt 0 ]; then
+	    while read CLINE; do
+		[ $(expr match "$CLINE" "=====.*") -gt 0 ] && break
+		echo $CLINE
+	    done < $FILE
+	fi
+    done < web/doc/$WEB.tmpl > web/doc/$WEB.html
+    IFS="$SAVEIFS"
+done
+
+# changelog:
+FILE="${BASE}ChangeLog"
+WEB=$(echo $FILE | tr [:upper:] [:lower:])
+WEB=${WEB##*/}
+IFS=""
+DLOPEN="no"
+DDOPEN="no"
+while read LINE; do
+    if [ $(expr match "$LINE" "INSERT.*") -gt 0 ]; then
+	while read CLINE; do
+	    [ $(expr match "$CLINE" "=====.*") -gt 0 ] && break
+	    if [ $(expr match "$CLINE" "------.*") -gt 0 ]; then
+		if [ $DDOPEN = "yes" ]; then
+		    echo "      </dd>"
+		    DDOPEN="no";
+		fi
+		if [ $DLOPEN = "yes" ]; then
+		    echo "    </dl>"
+		    DLOPEN="no"
+		fi
+		echo ""
+	    elif [ $(expr match "$CLINE" "Version.*") -gt 0 ]; then
+		echo "    <h3>$CLINE</h3>"
+		echo "    <dl>"
+		DLOPEN="yes"
+	    elif [ $(expr match "$CLINE" "20.*") -gt 0 ]; then
+		if [ $DDOPEN = "yes" ]; then
+		    echo "      </dd>"
+		    DDOPEN="no";
+		fi
+		echo "      <dt>$CLINE</dt>"
+	    elif [ $(expr match "$CLINE" ".*\w.*") -gt 0 ]; then
+		if echo "$CLINE" | grep '^\s*[A-Z]' &> /dev/null; then
+		    if [ $DDOPEN = "no" ]; then
+			echo "      <dd>"
+			DDOPEN="yes";
+		    else
+			echo "      </dd>"
+			echo "      <dd>"
+		    fi
+		fi
+		if [ $DDOPEN = "no" ]; then
+		    echo "      <dd>"
+		    DDOPEN="yes";
+		fi
+		echo "        $CLINE"
+	    fi
+	done < $FILE
+	[ $DDOPEN = "yes" ] && echo "      </dd>"
+	[ $DLOPEN = "yes" ] && echo "    </dl>"
+    else
+	echo "$LINE"
+    fi
+done < web/doc/$WEB.tmpl > web/doc/$WEB.html
+IFS="$SAVEIFS"
+
+# NEWS in doc/news.html:
+FILE="${BASE}NEWS"
+IFS=""
+while read LINE; do
+    if [ $(expr match "$LINE" "INSERTNEWS.*") -gt 0 ]; then
+        DDOPEN="no"
+	while read CLINE; do
+	    if [ $(expr match "$CLINE" "\w.*") -gt 0 ]; then
+		if [ $DDOPEN = "yes" ]; then
+		    echo "    </dd>"
+		    echo ""
+		    DDOPEN="no"
+		fi
+		echo "    <dt>$CLINE</dt>"
+		echo "    <dd>"
+		DDOPEN="yes"
+	    else
+		[ $(expr match "$CLINE" ".*\w.*") -gt 0 ] && echo "    $CLINE"
+	    fi
+	done < $FILE
+	[ $DDOPEN = "yes" ] && echo "    </dd>"
+    else
+	echo "$LINE"
+    fi
+done < web/doc/news.tmpl > web/doc/news.html
+IFS="$SAVEIFS"
+
+
+# plugin navigation:
+for SET in $PLUGINSETS; do
+    DIR=${SET%%:*}
+    DESCR=${SET##*:}
+    echo "	    <li><a href=\"../$DIR\">$DESCR</a></li>"
+done > navigation.tmp
+
+DATE="$(date)"
+
+# plugin index:
+IFS=""
+while read INDEXLINE; do
+    IFS="$SAVEIFS"
+    if [ $(expr match "$INDEXLINE" "PLUGINSETS.*") -gt 0 ]; then
+	echo "    <ul>"
+	for SET in $PLUGINSETS; do
+	    DIR=${SET%%:*}
+	    DESCR=${SET##*:}
+	    INTRO="$(sed -n '/<p>/,/<\/p>/p' web/plugins/$DIR/intro.html | sed '1d; $d')"
+	    echo "      <li><a href=\"$DIR\">$DESCR:</a> <span class=\"brief\">$INTRO</span></li>"
+	done
+	echo "    </ul>"
+    elif [ $(expr match "$INDEXLINE" "PLUGINNAVIGATION.*") -gt 0 ]; then
+	sed 's|../||' navigation.tmp 
+    else
+	echo "${INDEXLINE/DATE/$DATE}"
+    fi
+    IFS=""
+done < web/plugins/index.tmpl > web/plugins/index.html
+IFS="$SAVEIFS"
+
+
+# plugin descriptions:
+for SET in $PLUGINSETS; do
+    DIR=${SET%%:*}
+    DESCR=${SET##*:}
+    mkdir -p web/plugins/$DIR
+    cp $BASE$DIR/help/*.jpg $BASE$DIR/help/*.png web/plugins/$DIR/
+    IFS=""
+    while read INDEXLINE; do
+	IFS="$SAVEIFS"
+	if [ $(expr match "$INDEXLINE" ".*INSERT HERE.*") -gt 0 ]; then
+	    echo "    <h2>$DESCR Plugins</h2>"
+	    echo ""
+	    if [ -f web/plugins/$DIR/intro.html ]; then
+		cat web/plugins/$DIR/intro.html
+		echo ""
+	    fi
+	    if [ -d $BASE$DIR/help ]; then
+		echo "    <ul>"
+		for PLUGIN in $BASE$DIR/help/*.html; do
+ 	            PLUGINFILE=${PLUGIN##*/}
+		    PLUGINNAME=${PLUGINFILE%%.*}
+		    PLUGINNAME=${PLUGINNAME#*-}
+		    IFS=""
+		    while read LINE; do
+			if [ $(expr match "$LINE" ".*INSERT HERE.*") -gt 0 ]; then
+			    sed "1d; \$d; s|</h2>| <span class=\"pluginset\">\&nbsp;\&nbsp;[$DESCR Plugins]</span></h2>|" $PLUGIN
+			elif [ $(expr match "$LINE" "PLUGINNAVIGATION.*") -gt 0 ]; then
+			    cat navigation.tmp 
+			else
+			    LINE="${LINE/DATE/$DATE}"
+			    echo "${LINE/PLUGINHEADER/$DESCR Plugins: $PLUGINNAME}"
+			fi
+		    done < web/plugins/plugin.tmpl > web/plugins/$DIR/$PLUGINFILE
+		    IFS="$SAVEIFS"
+		    echo "      <li><a href=\"$PLUGINFILE\">$PLUGINNAME</a>: <span class=\"brief\">$(sed -n '/<h2>/,/<p>/p' $PLUGIN | sed '1d; $d;')</span></li>"
+		done
+		echo "    </ul>"
+	    else
+		echo "    <p>Sorry - no plugin descriptions available!</p>"
+	    fi
+	elif [ $(expr match "$INDEXLINE" "PLUGINNAVIGATION.*") -gt 0 ]; then
+	    cat navigation.tmp 
+	else
+	    INDEXLINE="${INDEXLINE/DATE/$DATE}"
+	    echo "${INDEXLINE/PLUGINHEADER/$DESCR Plugins}"
+	fi
+	IFS=""
+    done < web/plugins/plugin.tmpl > web/plugins/$DIR/index.html
+    IFS="$SAVEIFS"
+done
+
+rm navigation.tmp
