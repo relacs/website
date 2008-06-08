@@ -52,18 +52,20 @@
 
     <h3>Version 0.9.6</h3>
     <dl>
+      <dt>2008-02-27  Jan Benda, Sebastian Pipping</dt>
+      <dd>
+        	First commit to the subversion repository.
+        	Subsequently set up the GNU autotools.
+        	See svn log for details.
+      </dd>
       <dt>2008-02-14  Jan Benda</dt>
       <dd>
         	Created patch directory for patch-clamp related plugins
-      </dd>
-      <dd>
         	Added plugin documentation to web page
       </dd>
       <dt>2008-02-13  Jan Benda</dt>
       <dd>
         	Added setupInTraces() function to RELACSWidget class.
-      </dd>
-      <dd>
         	Added addTraces() to AnalogInput and AnalogOutput, addOutTraces() 
         	and inTraces() to Acquire, and updated the setupOutTraces() function 
         	to handle internal parameter and variables of a dynamic clamp modul.
@@ -71,11 +73,7 @@
       <dt>2008-02-12  Jan Benda</dt>
       <dd>
         	New class TraceSpec replaces OutData::Trace.
-      </dd>
-      <dd>
         	Moved static list of output traces from OutData as a member to Acquire.
-      </dd>
-      <dd>
         	Added setupOutTraces() function to RELACSWidget class.
       </dd>
       <dt>2008-02-06  Jan Benda</dt>
@@ -87,8 +85,6 @@
         	Changed plugins directory structure from detectors/ sessions/ repros/
         	to common/ and auditory/ to be able to switch between different
                 sets of plugins.
-      </dd>
-      <dd>
         	Added command line option -s for passing base name of config files.
       </dd>
     </dl>
@@ -110,22 +106,16 @@
       <dt>2008-01-22  Jan Benda</dt>
       <dd>
         	Checked and improved locking for relacs plugins.
-      </dd>
-      <dd>
         	Improved interfaces to Filter in RELACSPlugin.
       </dd>
       <dt>2008-01-18  Jan Benda</dt>
       <dd>
         	Moved path variables and sessionData from Session to SaveFiles.
-      </dd>
-      <dd>
         	Made Session a QHBox (for displaying the elapsed time in the status bar).
       </dd>
       <dt>2008-01-16  Jan Benda</dt>
       <dd>
         	New class MetaData and SetupData in metadata.h replace SessionInfo and SetupInfo.
-      </dd>
-      <dd>
         	Changed the Session concept: Session is no longer a Plugin.
       </dd>
     </dl>

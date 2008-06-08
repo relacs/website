@@ -3,7 +3,13 @@
 BASE=../relacs/trunk/
 
 # directories and descriptions of plugin sets:
-PLUGINSETS="hardware:Hardware common:Common auditory:Auditory patch:Patch-Clamp"
+PLUGINSETS="base:Base \
+calibration:Calibration \
+ephys:EPhys \
+acoustic:Acoustic \
+auditory:Auditory \
+auditoryprojects:Auditory-Projects \
+patchclamp:Patch-Clamp"
 
 SAVEIFS="$IFS"
 
@@ -180,7 +186,7 @@ for SET in $PLUGINSETS; do
     DIR=${SET%%:*}
     DESCR=${SET##*:}
     mkdir -p web/plugins/$DIR
-    cp $BASE$DIR/help/*.jpg $BASE$DIR/help/*.png web/plugins/$DIR/
+    cp ${BASE}plugins/$DIR/help/*.jpg ${BASE}plugins/$DIR/help/*.png web/plugins/$DIR/
     IFS=""
     while read INDEXLINE; do
 	IFS="$SAVEIFS"
@@ -191,9 +197,9 @@ for SET in $PLUGINSETS; do
 		cat web/plugins/$DIR/intro.html
 		echo ""
 	    fi
-	    if [ -d $BASE$DIR/help ]; then
+	    if [ -d ${BASE}plugins/$DIR/help ]; then
 		echo "    <ul>"
-		for PLUGIN in $BASE$DIR/help/*.html; do
+		for PLUGIN in ${BASE}plugins/$DIR/help/*.html; do
  	            PLUGINFILE=${PLUGIN##*/}
 		    PLUGINNAME=${PLUGINFILE%%.*}
 		    PLUGINNAME=${PLUGINNAME#*-}

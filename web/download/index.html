@@ -59,23 +59,23 @@
       See <a href="#roadmap">roadmap</a> below.
     </p>
     <p>
-      We hope to have most of all this ready soon (maybe in spring 2008).
+      We hope to have most of all this ready soon (in summer 2008 - we are almost done).
       If you want to be notified about the first release,
       write me an email: j.benda@biologie.hu-berlin.de, subject: relacs.
     </p>
     <p>
       If you can't wait for the official release, you can
+      download a snapshot fom the subversion repository
+      (<a href="#svn">see below for instructions</a>).
+<!---      
       <a href="https://sourceforge.net/projects/relacs/">download a prerelease from sourceforge</a>.
-    </p>
-    <p class="warning">
-      Don't expect it to compile or to work!
     </p>
     <p>
       <a href="http://sourceforge.net">
       <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=199846&amp;type=5" width="210" height="62" border="0" alt="SourceForge.net Logo">
       </a>
     </p>
-
+-->
 
     <a name="svn"></a>
     <h3>Subversion</h3>
@@ -84,6 +84,19 @@
       from the
       <a href="http://sourceforge.net/svn/?group_id=199846">Subversion repository</a> on
       <a href="http://www.sourceforge.net"> SourceForge</a>.
+    </p>
+    <p>
+      Use the following command to retrieve the current source tree:
+    </p>
+    <pre>
+svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pre>
+    <p>
+      (this command will download the source files into the directory ./relacs).
+    </p>
+    <p>
+      Then change to the relacs directory and
+      read the <a href="../doc/readme.html">README</a> and the 
+      <a href="../doc/install.html">INSTALL</a> files for more instructions.
     </p>
     <p>
       You can also
@@ -117,7 +130,7 @@
     <p> <span class="relacs">relacs</span> is currently developed under Linux. 
       However, since it is coded in
       standard C++ and uses the Qt-library for the GUI,
-      a port to Windows and Mac OS X should be possible.
+      a port to Mac OS X and Windows should be possible.
       For this, it would be helpful to change to Qt version 4 first.
       Also, interfaces to the (data acquisition)
       devices need to be implemented for each platform as needed.
@@ -129,6 +142,7 @@
     <h3>Requirements</h3>
     <ul>
       <li>Linux with kernel version 2.6</li>
+      <li>GNU autotools</li>
       <li><a href="http://doc.trolltech.com/3.3/">Qt version 3.3</a> (older versions have a bug in the thread support).</li>
       <li>Recommended: <a href="http://www.gnu.org/software/gsl/">Gnu Scientific Library</a></li>
       <li><a href="http://www.stack.nl/~dimitri/doxygen/">doxygen</a> for generating the documentation</li>
@@ -152,7 +166,7 @@
         specialized and we started to better modularize the code
         and to outsource everything that was specific to our experiments
         as a plugin. As a result the core program is now completely 
-        independent of the specific hardware used and 
+        independent of the specific hardware used and independent of
         the type of experimental setup.
       </dd>
 
@@ -160,14 +174,10 @@
       <dd>
         Since 2007 we are actively making the program ready to be shared
         with other people.
-        A few technicalities still need to done and we hope to have them
-        finished in April 2008:
-        <ol>
-          <li>find better and not yet used names for the libraries</li>
-          <li>replace '#include &quot;foo.h&quot;' by '#include &lt;relacs/foo.h&gt;' in all the plugins</li>
-          <li>use autoconf and automake</li>
-          <li>finish the <a href="http://www.comedi.org">comedi driver</a> support</li>
-        </ol>
+        A few technicalities still need to done and we should be done
+	with all that any time soon (maybe in July 2008).
+      </dd>
+      <dd>
         With this phase finished,
         you are welcome to join the
         project and contribute to it.
@@ -248,7 +258,7 @@
 <div class="trailer">
 <!-- Created: Fri Feb  8 10:30:52 CET 2008 -->
 <!-- hhmts start -->
-Last modified: Fri Apr 25 14:56:58 CEST 2008
+Last modified: Sun Jun  8 10:42:54 CEST 2008
 <!-- hhmts end -->
     <a href="http://validator.w3.org/check?uri=referer"><img src="../valid-html401.png" alt="Valid HTML 4.01 Transitional" height="31" width="88" align="middle"></a>
 </div>
