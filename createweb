@@ -34,7 +34,6 @@ Lib"
 
 SAVEIFS="$IFS"
 
-cat > /dev/null <<EOF
 echo "clean and setup destination folder $WEBDEST ..."
 
 # clean and create destination folder:
@@ -192,9 +191,6 @@ while read LINE; do
     fi
 done < $WEBBASE/doc/news.tmpl > $WEBDEST/doc/news.html
 IFS="$SAVEIFS"
-
-
-EOF
 
 # plugin navigation:
 echo "extract plugin set navigation ... "
