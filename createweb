@@ -228,7 +228,7 @@ while read INDEXLINE; do
     elif [ $(expr match "$INDEXLINE" "PLUGINTYPES.*") -gt 0 ]; then
 	echo "    <ul>"
 	for PLUGINTYPE in $PLUGINTYPES; do
-	    echo "      <li><a href=\"$(echo $PLUGINTYPE | tr [:upper:] [:lower:])plugins.dat\">$PLUGINTYPE</li>"
+	    echo "      <li><a href=\"$(echo $PLUGINTYPE | tr [:upper:] [:lower:])s.html\">$PLUGINTYPE</li>"
 	done
 	echo "    </ul>"
     elif [ $(expr match "$INDEXLINE" "PLUGINNAVIGATION.*") -gt 0 ]; then
