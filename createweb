@@ -56,7 +56,7 @@ done
 echo "create link to RELACS documentation ... "
 cd $WEBDEST/doc
 ln -f -s ../../$RELACSBASE/doc/html reference
-cd -
+cd - > /dev/null
 
 # NEWS in index.html:
 echo "create main index.html file ... "
@@ -243,7 +243,7 @@ for SET in $PLUGINSETS; do
     DESCR=${SET##*:}
     echo "create index for plugin set $DESCR ... "
     mkdir -p $WEBDEST/plugins/${DIR##*/}
-    cp $RELACSBASE/plugins/$DIR/help/*.jpg $RELACSBASE/plugins/$DIR/help/*.png $WEBDEST/plugins/${DIR##*/}/
+    cp -u $RELACSBASE/plugins/$DIR/help/*.jpg $RELACSBASE/plugins/$DIR/help/*.png $WEBDEST/plugins/${DIR##*/}/ 2> /dev/null
     IFS=""
     while read INDEXLINE; do
 	IFS="$SAVEIFS"
@@ -326,7 +326,7 @@ for PLUGINTYPE in $PLUGINTYPES; do
     IFS="$SAVEIFS"
 done
 
-#rm -f *plugins.dat
+rm -f *plugins.dat
 rm navigation.tmp
 
 echo "Ready! You find the relacs website in $WEBDEST"
