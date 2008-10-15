@@ -34,11 +34,12 @@ Lib"
 
 SAVEIFS="$IFS"
 
-echo "clean and setup destination folder $WEBDEST ..."
+#echo "clean and setup destination folder $WEBDEST ..."
+echo "setup destination folder $WEBDEST ..."
 
 # clean and create destination folder:
-rm -r -f $WEBDEST
-mkdir $WEBDEST
+#rm -r -f $WEBDEST
+mkdir -p $WEBDEST
 
 # create subdirectories:
 for dir in $WEBBASE/*; do
