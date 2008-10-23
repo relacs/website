@@ -124,10 +124,7 @@ for FILE in $RELACSBASE/README $RELACSBASE/INSTALL; do
     while read LINE; do
 	echo "$LINE"
 	if [ $(expr match "$LINE" ".*<pre>.*") -gt 0 ]; then
-	    while read CLINE; do
-		[ $(expr match "$CLINE" "=====.*") -gt 0 ] && break
-		echo $CLINE
-	    done < $FILE
+	    cat $FILE
 	fi
     done < $WEBBASE/doc/$WEB.tmpl > $WEBDEST/doc/$WEB.html
     IFS="$SAVEIFS"
