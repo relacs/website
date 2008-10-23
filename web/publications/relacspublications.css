@@ -1,0 +1,87 @@
+body { 
+  font-family: arial, helvetica, sans-serif;
+  font-size: 100%;
+  font-weight: normal;
+}
+
+span.relacs {
+  font-family: arial, helvetica, sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  text-transform: capitalize; /*   uppercase lowercase */
+}
+
+p {
+  margin-top: 0ex;
+  margin-bottom: 0ex;
+  padding-top: 0ex;
+  padding-bottom: 1ex;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+.figure { 
+  background-color: #EEEEFF;
+  border: 1px solid #AAAAFF;
+  margin-top: 0.5ex;
+  margin-bottom: 1.5ex;
+}
+
+.figure .image { 
+  float: left;
+  margin: 1ex;
+  border: 1px solid #AAAAFF;
+}
+
+.figure .image img { 
+  padding: 0.5ex;
+  background-color: white;
+}
+
+.figure .caption { 
+  font-size: small;
+  border-width: 0px;
+  margin: 1ex;
+  padding: 0.5ex;
+  background-color: white;
+}
+
+.figureright { 
+  float: right;
+  background-color: #EEEEFF;
+  border: 1px solid #AAAAFF;
+  margin-left: 1ex;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 1.5ex;
+}
+
+.figureright .image { 
+  margin: 10px;
+  border: 1px solid #AAAAFF;
+}
+
+.figureright .image img { 
+  padding: 0.5ex;
+  background-color: white;
+}
+
+.figureright .caption { 
+  font-size: small;
+  border-width: 0px;
+  margin: 10px;
+  padding: 0.5ex;
+  background-color: white;
+}
+
+.trailer { 
+  clear: both;
+  text-align: right;
+  margin-top: 1ex;
+  padding-top: 1ex;
+  border-style: solid;
+  border-color: #AAAAFF;
+  border-width: 0px;
+  border-top-width: 1px;
+}

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Script for creating the relacs website in WEBDEST from the templates
+# in WEBBASE.
+# (c) 2008 by Jan Benda
+
 RELACSBASE=../relacs/trunk
 WEBBASE=web
 WEBDEST=relacsweb
@@ -32,23 +36,44 @@ Temperature \
 Device \
 Lib"
 
+# clean previous web site:
+CLEANALL="no"
+if test "x$1" = "x-d"; then
+  CLEANALL="yes"
+  shift
+fi
+
+# no plugins:
+DOPLUGINS="yes"
+if test "x$1" = "x-n"; then
+  DOPLUGINS="no"
+  shift
+fi
+
+
+##### the script: ########################################################
+
 SAVEIFS="$IFS"
 
-#echo "clean and setup destination folder $WEBDEST ..."
-echo "setup destination folder $WEBDEST ..."
-
 # clean and create destination folder:
-#rm -r -f $WEBDEST
+if test $CLEANALL = yes; then
+  echo "clean and setup destination folder $WEBDEST ..."
+  rm -r -f $WEBDEST
+else
+  echo "setup destination folder $WEBDEST ..."
+fi
 mkdir -p $WEBDEST
 
 # create subdirectories:
 for dir in $WEBBASE/*; do
-  if test -d $dir; then
+  if test -d $dir && ! test -d $WEBDEST/${dir#$WEBBASE/}; then
+    echo "creat directory ${dir#$WEBBASE/} ..."
     mkdir $WEBDEST/${dir#$WEBBASE/}
   fi
 done
 
 # copy html, css, png, and pdf files:
+echo "copy html, css, png, and pdf files to $WEBBASE ..."
 for file in $(find $WEBBASE -name '*.html' -o -name '*.css' -o -name '*.png' -o -name '*.jpg' -o -name '*.pdf'); do
     cp -p $file $WEBDEST/${file#$WEBBASE/}
 done
@@ -193,15 +218,18 @@ while read LINE; do
 done < $WEBBASE/doc/news.tmpl > $WEBDEST/doc/news.html
 IFS="$SAVEIFS"
 
+
+if test $DOPLUGINS = yes; then
+
 # plugin navigation:
 echo "extract plugin set navigation ... "
-echo "          <a href=\"../index.html#pluginsets\">By Plugin Set</a>" >> navigation.tmp
+echo "          <li class="title"><a href=\"../index.html#pluginsets\">By Plugin Set</a></li>" >> navigation.tmp
 for SET in $PLUGINSETS; do
     DIR=${SET%%:*}
     DESCR=${SET##*:}
     echo "	    <li><a href=\"../${DIR##*/}\">$DESCR</a></li>"
 done >> navigation.tmp
-echo "          <a href=\"../index.html#plugintypes\">By Plugin Type</a>" >> navigation.tmp
+echo "          <li class="title"><a href=\"../index.html#plugintypes\">By Plugin Type</a></li>" >> navigation.tmp
 for TYPE in $PLUGINTYPES; do
     echo "	    <li><a href=\"../$(echo $TYPE | tr [:upper:] [:lower:])s.html\">$TYPE</a></li>"
 done >> navigation.tmp
@@ -330,5 +358,10 @@ done
 rm -f *plugins.dat
 rm navigation.tmp
 
+fi
+
+echo
 echo "Ready! You find the relacs website in $WEBDEST"
+echo "Update the public website with"
+echo "  rsync -avz relacsweb/ janbenda,relacs@web.sourceforge.net:htdocs/"
 

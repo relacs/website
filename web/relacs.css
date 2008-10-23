@@ -215,15 +215,27 @@ table.layout {
   list-style-type: circle;
   margin-top: 0.5ex;
   margin-bottom: 0ex;
-  margin-left: 2.5ex;
+  margin-left: 0ex;
   font-weight: normal;
   font-size: 80%;
 }
 
 .navigation > ul > li > ul > li { 
+  margin-left: 2.5ex;
   margin-bottom: 0ex;
   padding-bottom: 0ex;
 }
+
+.navigation > ul > li > ul > li.title { 
+  list-style-type: none;
+  margin-left: 0ex;
+  font-weight: bold;
+}
+
+.navigation > ul > li > ul > li + .title { 
+  margin-top: 0.5ex;
+}
+
 
 .content {
   width: 100%;

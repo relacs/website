@@ -14,7 +14,7 @@
       </div>
       <div class="titles">
 	<h1><img src="../relacslogo.png" alt="relacs"></h1>
-	<h2><b>R</b>elaxed <b>El</b>ectrophysiological data <b>A</b>cquisition, <b>C</b>ontrol, and <b>S</b>timulation</h2>
+	<h2><b>R</b>elaxed <b>El</b>ectrophysiological Data <b>A</b>cquisition, <b>C</b>ontrol, and <b>S</b>timulation</h2>
 	<h3>by Jan Benda, 2002 - 2008</h3>
       </div>
     </div>
@@ -28,7 +28,7 @@
 	    <li><a href="#closedloop">Closed-loop experiments</a></li>
 	    <li><a href="#model">Model simulations</a></li>
 	    <li><a href="#hardware">Hardware independence</a></li>
-	    <li><a href="#threads">Multi-threaded design</a></li>
+<!--	    <li><a href="#threads">Multi-threaded design</a></li>  -->
 	    <li><a href="#analysis">Data-analysis library</a></li>
 	    <li><a href="#metadata">Meta-data</a></li>
 	    <li><a href="#free">Free software</a></li>
@@ -67,6 +67,17 @@
       are modified and new experiments are conducted.
     </p>
 
+    <div class="figureright">
+      <div class="image">
+        <img src="closedloop.png" alt="closed-loop">
+      </div>
+      <div class="caption">
+        Closed-loop experiments.  
+        From <a href="../publications/Benda2007abstract.html">
+        Benda et al. 2007</a>.
+      </div>
+    </div>
+
     <p>
       <span class="relacs">relacs</span> is designed as an framework for
       closed-loop experiments that may considerably speed up
@@ -78,32 +89,6 @@
       standard deviation, spectral content...)
       are adjusted as needed (see figure).
     </p>
-
-    <div class="figure" style="min-height: 337px">
-      <div class="image">
-        <img src="closedloop.png" alt="closed-loop">
-      </div>
-      <div class="caption">
-        Closed-loop experiments and adaptive sampling. First, the
-        sensory system under investigation is presented with an
-        initial stimulus such as a sound wave or a color
-        image. Second, the neural system converts this input stimulus
-        into an output response--the membrane potential of a single
-        neuron, a multi-unit signal as measured in an extracellular
-        recording, a calcium or EEG signal and so on. Third, this
-        response is measured and recorded with a computer system. If
-        necessary, spikes are automatically detected and sorted
-        online. Following this data pre-processing, the neural
-        response is further analyzed according to the theoretical
-        framework underlying the specific experiment. Fourth, a new
-        stimulus is generated on the basis of the results of this
-        analysis thus closing the loop. Iterating this loop, stimuli
-        can be generated that reflect the particular response
-        characteristics of the studied system.  From <a
-        href="../publications/Benda2007abstract.html">Benda et
-        al. 2007</a>.
-      </div>
-    </div>
 
     <p>
       The closed-loop approach is beneficial on many levels,
@@ -131,121 +116,21 @@
     </p>
     <ul>
 
-      <li>Optimal search for a neuron's receptive field.</li>
-
-    <div class="figure" style="min-height: 271">
-      <div class="image">
-        <img src="receptivefield.png" alt="receptive field">
-      </div>
-      <div class="caption">
-	Adaptive estimation of receptive fields, as demonstrated by a
-	numerical simulation study. (a) The top row shows how the
-	structure of a receptive field builds up gradually when a
-	standard neurophysiological approach is used. Here,
-	white-noise stimuli are presented and the receptive field is
-	estimated as the spike-triggered average. The bottom row shows
-	results from an adaptive sampling technique in which each new
-	stimulus is selected such that it maximizes the information
-	gained about the receptive field. (b) The true receptive
-	field. (c) The uncertainty of the estimates, quantified by the
-	entropy of the parameter distribution, drops far more rapidly
-	for the adaptive sampling technique than for white-noise
-	sampling (data provided by courtesy of J. Lewi).
-        From <a href="../publications/Benda2007abstract.html">Benda et al. 2007</a>,
-        as modified from Lewi J, Butera R, Paninski L: Real-time
-        adaptive information-theoretic optimization of
-        neurophysiology experiments. In Adv Neural Inf Process Syst,
-        Volume 19. Edited by Scholkopf B, Platt J, Hoffman
-        T. Cambridge, MA: MIT Press; 2007:857-864.
-      </div>
-    </div>
+      <li>Optimal search for a neuron's receptive field.
+          <a href="../publications/Benda2007abstract.html#receptivefield">More ...</a></li>
 
       <li>Search for stimuli that drive a neuron in an "optimal"
-      way (firing rate, coding quality, mutual information).</li>
-
-    <div class="figure" style="min-height: 389px">
-      <div class="image">
-        <img src="optimalstimulus.png" alt="optimal stimulus">
-      </div>
-      <div class="caption">
-        Iterative search for optimal stimulus ensembles (OSEs). (a) In
-        this analysis of an auditory receptor neuron, stimuli are sets
-        of ten 80 ms-long snippets of white-noise amplitude
-        modulations of a sine-wave carrier. Sample mean and standard
-        deviation (colored dots in top-left panel) are drawn from a
-        two-dimensional Gaussian distribution whose standard deviation
-        is represented by the black ellipse. The stimuli are played
-        repeatedly (top-right panel), resulting in spike-train
-        responses that vary slightly from trial to trial (bottom-right
-        panel). On the basis of the responses from several trials, the
-        contribution of each stimulus to the mutual information is
-        estimated; this contribution is depicted by the size of the
-        colored dots representing the individual snippets (bottom-left
-        panel). The contributions are taken as weight factors to
-        update the parameters of the Gaussian distribution that is
-        thus shifted toward the more important stimuli (new black
-        ellipse). The updated stimulus ensemble is then used to draw
-        new, additional test stimuli. (b) For a longer sample run with
-        multiple iterations, intermediate estimates of the OSE (grey)
-        rapidly converge to the final OSE (black). As shown by the
-        iso-firing-rate lines, the OSE is centered at the steepest
-        part of the tuning curve and triggers responses that cover
-        almost the full range of firing rates. As desired, the OSE is
-        thus indeed located in the most informative region in stimulus
-        space. (c) Accordingly, the information rate initially grows
-        rather fast with each iteration until it saturates after about
-        20 iterations.
-        From <a href="../publications/Benda2007abstract.html">Benda et al. 2007</a>,
-        as modified from <a href="../publications/Machens2005abstract.html">Machens et al. 2005</a>.
-      </div>
-    </div>
+          way (firing rate, coding quality, mutual information).
+          <a href="../publications/Benda2007abstract.html#optimalstimulus">More ...</a></li>
 
       <li>Find set's of stimulus parameter that result in the
-      same response (iso-response method).</li>
-
-    <div class="figure" style="min-height: 276">
-      <div class="image">
-        <img src="isoresponse.png" alt="iso-response">
-      </div>
-      <div class="caption">
-        Discrimination of alternative response relations using the
-        Iso-Response Method. (a and b) A hypothetical two-dimensional
-        stimulus space is spanned by the variables s1 and s2. The
-        drawn surfaces represent the response r(s1,s2) for two
-        different models, which take the linear (a) and quadratic sum
-        (b) as the argument of a sigmoid non-linearity. Although the
-        two input-output scenarios are fundamentally
-        different, both produce exactly the same one-dimensional
-        response functions r(s1) and r(s2), respectively, as seen by
-        the black areas at the sides of the surface blocks.
-        Furthermore, any measurement along a radial direction, as is
-        common in physiological experiments, will produce similar
-        sigmoid response curves in both cases, as seen by the thick
-        black lines running along the surfaces. The iso-response
-        manifolds r=const (here: one-dimensional curves) below the
-        surface plots, however, give a clear signature of the
-        different underlying processes. (c) Iso-firing-rate curves for
-        an auditory neuron stimulated by superpositions of two pure
-        tones. The measured pairs of amplitudes s1 and s2
-        corresponding to a firing rate r of 150 Hz are shown together
-        with the iso-firing-rate curves for the two scenarios which
-        now correspond to sound-amplitude integration (a) and
-        sound-energy integration (b), respectively. The straight line
-        for the amplitude hypothesis deviates systematically from the
-        data, whereas the ellipse obtained from the energy hypothesis
-        provides an excellent fit. The different scales on the axes
-        reflect the strong frequency dependence of the neuron's sound
-        sensitivity. (d) As expected from the sound-energy model,
-        iso-response lines for different output firing rates are
-        scaled ellipses.
-        From <a href="../publications/Benda2007abstract.html">Benda et al. 2007</a>,
-        as modified from <a href="../publications/Gollisch2002abstract.html">Gollisch et al. 2002</a>.
-      </div>
-    </div>
+          same response (iso-response method).
+          <a href="../publications/Benda2007abstract.html#isoresponse">More ...</a></li>
 
     </ul>
     <p>
-      See our <a href="../publications/Benda2007abstract.html">review</a>
+      See our review <a href="../publications/Benda2007abstract.html">
+      "From response to stimulus: adaptive sampling in sensory physiology"</a>
       for more details.
     </p>
 
@@ -292,7 +177,7 @@
       experimental protocols with other labs.
     </p>
 
-
+<!--
     <a name="threads"></a>
     <h3>Multi-threaded design</h3>
     <p>
@@ -306,7 +191,7 @@
       larger data volumes, 
       as they are acquired from multi-unit recordings, for example.
     </p>
-
+-->
 
     <a name="analysis"></a>
     <h3>Data-analysis library</h3>
@@ -378,7 +263,7 @@
 <div class="trailer">
 <!-- Created: Fri Feb  8 10:38:01 CET 2008 -->
 <!-- hhmts start -->
-Last modified: Tue Feb 26 13:22:23 CET 2008
+Last modified: Thu Oct 23 18:16:11 CEST 2008
 <!-- hhmts end -->
     <a href="http://validator.w3.org/check?uri=referer"><img src="../valid-html401.png" alt="Valid HTML 4.01 Transitional" height="31" width="88" align="middle"></a>
 </div>

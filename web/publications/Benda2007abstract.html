@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Benda, Gollisch, Machens &amp; Herz 2007: Abstract</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+    <link rel="stylesheet" type="text/css" href="relacspublications.css">
   </head>
 
   <body>
@@ -29,11 +31,129 @@
     in all three directions, substantial progress can be achieved once
     rapid online data analysis, adaptive sampling, and computational
     modeling are tightly integrated into experiments.
- 
+
+
+    <h2>Content</h2>
+
+    <a name="receptivefield"></a>
+    <h4>Optimal search for a neuron's receptive field</h4>
+
+    <div class="figure" style="min-height: 271">
+      <div class="image">
+        <img src="receptivefield.png" alt="receptive field">
+      </div>
+      <div class="caption">
+	Adaptive estimation of receptive fields, as demonstrated by a
+	numerical simulation study. (a) The top row shows how the
+	structure of a receptive field builds up gradually when a
+	standard neurophysiological approach is used. Here,
+	white-noise stimuli are presented and the receptive field is
+	estimated as the spike-triggered average. The bottom row shows
+	results from an adaptive sampling technique in which each new
+	stimulus is selected such that it maximizes the information
+	gained about the receptive field. (b) The true receptive
+	field. (c) The uncertainty of the estimates, quantified by the
+	entropy of the parameter distribution, drops far more rapidly
+	for the adaptive sampling technique than for white-noise
+	sampling (data provided by courtesy of J. Lewi).
+        From Benda et al. 2007,
+        as modified from Lewi J, Butera R, Paninski L: Real-time
+        adaptive information-theoretic optimization of
+        neurophysiology experiments. In Adv Neural Inf Process Syst,
+        Volume 19. Edited by Scholkopf B, Platt J, Hoffman
+        T. Cambridge, MA: MIT Press; 2007:857-864.
+      </div>
+    </div>
+
+    <a name="optimalstimulus"></a>
+    <h4>Search for stimuli that drive a neuron in an "optimal"
+      way (firing rate, coding quality, mutual information)</h4>
+
+    <div class="figure" style="min-height: 389px">
+      <div class="image">
+        <img src="optimalstimulus.png" alt="optimal stimulus">
+      </div>
+      <div class="caption">
+        Iterative search for optimal stimulus ensembles (OSEs). (a) In
+        this analysis of an auditory receptor neuron, stimuli are sets
+        of ten 80 ms-long snippets of white-noise amplitude
+        modulations of a sine-wave carrier. Sample mean and standard
+        deviation (colored dots in top-left panel) are drawn from a
+        two-dimensional Gaussian distribution whose standard deviation
+        is represented by the black ellipse. The stimuli are played
+        repeatedly (top-right panel), resulting in spike-train
+        responses that vary slightly from trial to trial (bottom-right
+        panel). On the basis of the responses from several trials, the
+        contribution of each stimulus to the mutual information is
+        estimated; this contribution is depicted by the size of the
+        colored dots representing the individual snippets (bottom-left
+        panel). The contributions are taken as weight factors to
+        update the parameters of the Gaussian distribution that is
+        thus shifted toward the more important stimuli (new black
+        ellipse). The updated stimulus ensemble is then used to draw
+        new, additional test stimuli. (b) For a longer sample run with
+        multiple iterations, intermediate estimates of the OSE (grey)
+        rapidly converge to the final OSE (black). As shown by the
+        iso-firing-rate lines, the OSE is centered at the steepest
+        part of the tuning curve and triggers responses that cover
+        almost the full range of firing rates. As desired, the OSE is
+        thus indeed located in the most informative region in stimulus
+        space. (c) Accordingly, the information rate initially grows
+        rather fast with each iteration until it saturates after about
+        20 iterations.
+        From Benda et al. 2007,
+        as modified from <a href="Machens2005abstract.html">Machens et al. 2005</a>.
+      </div>
+    </div>
+
+    <a name="isoresponse"></a>
+    <h4>Find set's of stimulus parameter that result in the
+      same response (iso-response method)</h4>
+
+    <div class="figure" style="min-height: 276">
+      <div class="image">
+        <img src="isoresponse.png" alt="iso-response">
+      </div>
+      <div class="caption">
+        Discrimination of alternative response relations using the
+        Iso-Response Method. (a and b) A hypothetical two-dimensional
+        stimulus space is spanned by the variables s1 and s2. The
+        drawn surfaces represent the response r(s1,s2) for two
+        different models, which take the linear (a) and quadratic sum
+        (b) as the argument of a sigmoid non-linearity. Although the
+        two input-output scenarios are fundamentally
+        different, both produce exactly the same one-dimensional
+        response functions r(s1) and r(s2), respectively, as seen by
+        the black areas at the sides of the surface blocks.
+        Furthermore, any measurement along a radial direction, as is
+        common in physiological experiments, will produce similar
+        sigmoid response curves in both cases, as seen by the thick
+        black lines running along the surfaces. The iso-response
+        manifolds r=const (here: one-dimensional curves) below the
+        surface plots, however, give a clear signature of the
+        different underlying processes. (c) Iso-firing-rate curves for
+        an auditory neuron stimulated by superpositions of two pure
+        tones. The measured pairs of amplitudes s1 and s2
+        corresponding to a firing rate r of 150 Hz are shown together
+        with the iso-firing-rate curves for the two scenarios which
+        now correspond to sound-amplitude integration (a) and
+        sound-energy integration (b), respectively. The straight line
+        for the amplitude hypothesis deviates systematically from the
+        data, whereas the ellipse obtained from the energy hypothesis
+        provides an excellent fit. The different scales on the axes
+        reflect the strong frequency dependence of the neuron's sound
+        sensitivity. (d) As expected from the sound-energy model,
+        iso-response lines for different output firing rates are
+        scaled ellipses.
+        From Benda et al. 2007,
+        as modified from <a href="Gollisch2002abstract.html">Gollisch et al. 2002</a>.
+      </div>
+    </div>
+
     <hr>
 <!-- Created: Wed Aug 22 09:58:47 CEST 2007 -->
 <!-- hhmts start -->
-Last modified: Thu Feb  7 10:57:20 CET 2008
+Last modified: Thu Oct 23 18:06:00 CEST 2008
 <!-- hhmts end -->
   </body>
 </html>
