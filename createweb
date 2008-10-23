@@ -8,6 +8,28 @@ RELACSBASE=../relacs/trunk
 WEBBASE=web
 WEBDEST=relacsweb
 
+# directories and names for the main menu:
+MAINMENU=".:Home \
+features:Features \
+screenshots:Screenshots \
+download:Download \
+doc:Documentation \
+plugins:Plugins \
+faq:FAQ \
+publications:Publications \
+contributors:Contributors \
+links:Links"
+
+# directories with index files:
+INDEXDIRS="features \
+screenshots \
+download \
+doc \
+faq \
+publications \
+contributors
+links"
+
 # directories and descriptions of plugin sets:
 PLUGINSETS="base:Base \
 calibration:Calibration \
@@ -53,6 +75,44 @@ fi
 
 ##### the script: ########################################################
 
+function insertnavigation 
+{
+    local CURRENTDIR="$1"
+    local LINK="$2"
+    local BASEDIR="$3"
+
+    local MENUSAVEIFS="$IFS"
+    echo "    <td class="navigation">"
+    echo "      <ul>"
+    IFS=" "
+    for MENUENTRY in $MAINMENU; do
+        local MENUDIR=${MENUENTRY%%:*}
+        local MENUNAME="${MENUENTRY##*:}"
+	if test "x$MENUDIR" = "x$CURRENTDIR" ; then
+   	    local TEXT="<a href="$LINK">$MENUNAME</a>"
+	    if test "x$LINK" = "xno" ; then
+		TEXT="$MENUNAME"
+	    fi
+	    if test -f $WEBBASE/$MENUDIR/menu.tmpl ; then
+                echo "        <li>$TEXT"
+	        cat $WEBBASE/$MENUDIR/menu.tmpl
+                echo "        </li>"
+	    else
+                echo "        <li>$TEXT</li>"
+            fi
+        else
+	    if test "x$MENUDIR" = "x." ; then
+		MENUDIR=index.html
+	    fi
+            echo "        <li><a href="${BASEDIR}${MENUDIR}">$MENUNAME</a></li>"
+        fi
+    done
+    echo "      </ul>"
+    echo "    </td>"
+    IFS="$MENUSAVEIFS"
+}
+
+
 SAVEIFS="$IFS"
 
 # clean and create destination folder:
@@ -84,12 +144,32 @@ cd $WEBDEST/doc
 ln -f -s ../../$RELACSBASE/doc/html reference
 cd - > /dev/null
 
+# translate other index.html files:
+for DIR in $INDEXDIRS; do
+    echo "translate $DIR/index.html ..."
+    IFS=""
+    while read LINE; do
+	if [ $(expr match "$LINE" "INSERTHEADER.*") -gt 0 ]; then
+	    sed -e 's|BASEDIR|../|' $WEBBASE/header.tmpl
+	elif [ $(expr match "$LINE" "INSERTNAVIGATION.*") -gt 0 ]; then
+	    insertnavigation "$DIR" "no" "../"
+	else
+	    echo "$LINE"
+	fi
+    done < $WEBBASE/$DIR/index.tmpl > $WEBDEST/$DIR/index.html
+    IFS="$SAVEIFS"
+done
+
 # NEWS in index.html:
 echo "create main index.html file ... "
 FILE="$RELACSBASE/NEWS"
 IFS=""
 while read LINE; do
-    if [ $(expr match "$LINE" "INSERTNEWS.*") -gt 0 ]; then
+    if [ $(expr match "$LINE" "INSERTHEADER.*") -gt 0 ]; then
+	sed -e 's|BASEDIR||' $WEBBASE/header.tmpl
+    elif [ $(expr match "$LINE" "INSERTNAVIGATION.*") -gt 0 ]; then
+	insertnavigation "." "no" ""
+    elif [ $(expr match "$LINE" "INSERTNEWS.*") -gt 0 ]; then
 	COUNT=0
         DDOPEN="no"
 	while read CLINE; do
@@ -122,9 +202,15 @@ for FILE in $RELACSBASE/README $RELACSBASE/INSTALL; do
     WEB=${WEB##*/}
     IFS=""
     while read LINE; do
-	echo "$LINE"
-	if [ $(expr match "$LINE" ".*<pre>.*") -gt 0 ]; then
+	if [ $(expr match "$LINE" "INSERTHEADER.*") -gt 0 ]; then
+	    sed -e 's|BASEDIR|../|' $WEBBASE/header.tmpl
+	elif [ $(expr match "$LINE" "INSERTNAVIGATION.*") -gt 0 ]; then
+	    insertnavigation "doc" "no" "../"
+	elif [ $(expr match "$LINE" ".*<pre>.*") -gt 0 ]; then
+	    echo "$LINE"
 	    cat $FILE
+	else
+	    echo "$LINE"
 	fi
     done < $WEBBASE/doc/$WEB.tmpl > $WEBDEST/doc/$WEB.html
     IFS="$SAVEIFS"
@@ -139,7 +225,11 @@ IFS=""
 DLOPEN="no"
 DDOPEN="no"
 while read LINE; do
-    if [ $(expr match "$LINE" "INSERT.*") -gt 0 ]; then
+    if [ $(expr match "$LINE" "INSERTHEADER.*") -gt 0 ]; then
+	sed -e 's|BASEDIR|../|' $WEBBASE/header.tmpl
+    elif [ $(expr match "$LINE" "INSERTNAVIGATION.*") -gt 0 ]; then
+	insertnavigation "doc" "no" "../"
+    elif [ $(expr match "$LINE" "INSERT.*") -gt 0 ]; then
 	while read CLINE; do
 	    [ $(expr match "$CLINE" "=====.*") -gt 0 ] && break
 	    if [ $(expr match "$CLINE" "------.*") -gt 0 ]; then
@@ -192,7 +282,11 @@ echo "format NEWS file ... "
 FILE="$RELACSBASE/NEWS"
 IFS=""
 while read LINE; do
-    if [ $(expr match "$LINE" "INSERTNEWS.*") -gt 0 ]; then
+    if [ $(expr match "$LINE" "INSERTHEADER.*") -gt 0 ]; then
+	sed -e 's|BASEDIR|../|' $WEBBASE/header.tmpl
+    elif [ $(expr match "$LINE" "INSERTNAVIGATION.*") -gt 0 ]; then
+	    insertnavigation "doc" "no" "../"
+    elif [ $(expr match "$LINE" "INSERTNEWS.*") -gt 0 ]; then
         DDOPEN="no"
 	while read CLINE; do
 	    if [ $(expr match "$CLINE" "\w.*") -gt 0 ]; then
@@ -220,16 +314,18 @@ if test $DOPLUGINS = yes; then
 
 # plugin navigation:
 echo "extract plugin set navigation ... "
-echo "          <li class="title"><a href=\"../index.html#pluginsets\">By Plugin Set</a></li>" >> navigation.tmp
+echo "          <ul>" > navigation.tmp
+echo "            <li class="title"><a href=\"../index.html#pluginsets\">By Plugin Set</a></li>" >> navigation.tmp
 for SET in $PLUGINSETS; do
     DIR=${SET%%:*}
     DESCR=${SET##*:}
-    echo "	    <li><a href=\"../${DIR##*/}\">$DESCR</a></li>"
+    echo "            <li><a href=\"../${DIR##*/}\">$DESCR</a></li>"
 done >> navigation.tmp
-echo "          <li class="title"><a href=\"../index.html#plugintypes\">By Plugin Type</a></li>" >> navigation.tmp
+echo "            <li class="title"><a href=\"../index.html#plugintypes\">By Plugin Type</a></li>" >> navigation.tmp
 for TYPE in $PLUGINTYPES; do
-    echo "	    <li><a href=\"../$(echo $TYPE | tr [:upper:] [:lower:])s.html\">$TYPE</a></li>"
+    echo "            <li><a href=\"../$(echo $TYPE | tr [:upper:] [:lower:])s.html\">$TYPE</a></li>"
 done >> navigation.tmp
+echo "          </ul>" >> navigation.tmp
 
 DATE="$(date)"
 
@@ -253,8 +349,11 @@ while read INDEXLINE; do
 	    echo "      <li><a href=\"$(echo $PLUGINTYPE | tr [:upper:] [:lower:])s.html\">$PLUGINTYPE</li>"
 	done
 	echo "    </ul>"
-    elif [ $(expr match "$INDEXLINE" "PLUGINNAVIGATION.*") -gt 0 ]; then
-	sed 's|../||' navigation.tmp 
+    elif [ $(expr match "$INDEXLINE" "INSERTHEADER.*") -gt 0 ]; then
+	sed -e 's|BASEDIR|../|' $WEBBASE/header.tmpl
+    elif [ $(expr match "$INDEXLINE" "INSERTNAVIGATION.*") -gt 0 ]; then
+	sed 's|\.\./||' navigation.tmp > $WEBBASE/plugins/menu.tmpl 
+	insertnavigation "plugins" "no" "../"
     else
 	echo "${INDEXLINE/DATE/$DATE}"
     fi
@@ -294,8 +393,11 @@ for SET in $PLUGINSETS; do
 		    while read LINE; do
 			if [ $(expr match "$LINE" ".*INSERT HERE.*") -gt 0 ]; then
 			    sed -e  "1d; \$d; s|<h2>\(.*\) \+\[.*\]</h2>|<h2>\1<span class=\"pluginset\">\&nbsp;\&nbsp;[<a href=\"../${PLUGINTYPEFILEBASE}s.html\">$PLUGINTYPE</a>]\&nbsp;\&nbsp;[<a href=\"index.html\">$DESCR Plugins</a>]</span></h2>|" $PLUGIN
-			elif [ $(expr match "$LINE" "PLUGINNAVIGATION.*") -gt 0 ]; then
-			    cat navigation.tmp 
+			elif [ $(expr match "$LINE" "INSERTHEADER.*") -gt 0 ]; then
+			    sed -e 's|BASEDIR|../../|' $WEBBASE/header.tmpl
+			elif [ $(expr match "$LINE" "INSERTNAVIGATION.*") -gt 0 ]; then
+			    cp navigation.tmp $WEBBASE/plugins/menu.tmpl 
+			    insertnavigation "plugins" "../index.html" "../../"
 			else
 			    LINE="${LINE/DATE/$DATE}"
 			    echo "${LINE/PLUGINHEADER/$DESCR Plugins: $PLUGINNAME}"
@@ -309,8 +411,11 @@ for SET in $PLUGINSETS; do
 	    else
 		echo "    <p>Sorry - no plugin descriptions available!</p>"
 	    fi
-	elif [ $(expr match "$INDEXLINE" "PLUGINNAVIGATION.*") -gt 0 ]; then
-	    cat navigation.tmp 
+        elif [ $(expr match "$INDEXLINE" "INSERTHEADER.*") -gt 0 ]; then
+	    sed -e 's|BASEDIR|../../|' $WEBBASE/header.tmpl
+        elif [ $(expr match "$INDEXLINE" "INSERTNAVIGATION.*") -gt 0 ]; then
+	    cp navigation.tmp $WEBBASE/plugins/menu.tmpl 
+	    insertnavigation "plugins" "../index.html" "../../"
 	else
 	    INDEXLINE="${INDEXLINE/DATE/$DATE}"
 	    echo "${INDEXLINE/PLUGINHEADER/$DESCR Plugins}"
@@ -341,8 +446,11 @@ for PLUGINTYPE in $PLUGINTYPES; do
 		echo "      <li><a href=\"${DIR}\">$NAME</a> [<a href=\"$PLUGINSET\">$DESCR</a>]: <span class=\"brief\">$(sed -n '/<h2>.*<span/,/<p>/p' $WEBDEST/plugins/$DIR | sed '1d; $d;')</span></li>"
             done < <(sort -k 2 $(echo $PLUGINTYPE | tr [:upper:] [:lower:])plugins.dat)
 	    echo "    </ul>"
-	elif [ $(expr match "$INDEXLINE" "PLUGINNAVIGATION.*") -gt 0 ]; then
-	    sed 's|../||' navigation.tmp 
+        elif [ $(expr match "$INDEXLINE" "INSERTHEADER.*") -gt 0 ]; then
+	    sed -e 's|BASEDIR|../|' $WEBBASE/header.tmpl
+        elif [ $(expr match "$INDEXLINE" "INSERTNAVIGATION.*") -gt 0 ]; then
+	    sed 's|\.\./||' navigation.tmp > $WEBBASE/plugins/menu.tmpl 
+	    insertnavigation "plugins" "index.html" "../"
 	else
 	    INDEXLINE="${INDEXLINE/DATE/$DATE}"
 	    echo "${INDEXLINE/PLUGINHEADER/$PLUGINTYPE}"
@@ -354,6 +462,7 @@ done
 
 rm -f *plugins.dat
 rm navigation.tmp
+rm $WEBBASE/plugins/menu.tmpl 
 
 fi
 
