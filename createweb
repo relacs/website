@@ -34,19 +34,19 @@ linuxdevices/attcs3310:Att-CS3310 \
 linuxdevices/misc:Miscellaneous"
 
 # names of plugin types:
-PLUGINTYPES="RePro \
-Control \
-Filter \
-Detector \
-Model \
-AnalogInput \
-AnalogOutput \
-Attenuator \
-Attenuate \
-Manipulator \
-Temperature \
-Device \
-Lib"
+PLUGINTYPES="RePro:Experimental protocols.|\
+Control:General information about recording, passive analysis.|\
+Filter:Filters analog input traces and events.|\
+Detector:Detects events (e.g.spikes) in analog input traces and events.|\
+Model:A model for the simulation mode.|\
+AnalogInput:Interface to the data acquisition board.|\
+AnalogOutput:Interface to the data acquisition board.|\
+Attenuator:Interface to attenuator hardware.|\
+Attenuate:Specifies attenuation of single output channels.|\
+Manipulator:Controls motorized manipulators.|\
+Temperature:Measures temperatures.|\
+Device:Any other device.|\
+Lib:Libraries to be used by other plugins."
 
 # clean previous web site:
 CLEANALL="no"
@@ -154,7 +154,7 @@ function createhtml
 		local HTMLBODYSPACE="${HTMLSPACES}"
 		test "$BODYPRE" = "yes" && HTMLBODYSPACE=""
 		echo "${HTMLBODYSPACE}${BODYLINE}"
-		[ $(expr match "$BODYLINE" ".*<pre>.*") -gt 0 ] && BODYPRE="yes"
+		[ $(expr match "$BODYLINE" ".*<pre .*>.*") -gt 0 ] && BODYPRE="yes"
 		[ $(expr match "$BODYLINE" ".*</pre>.*") -gt 0 ] && BODYPRE="no"
 	    done < $WEBBASE/$SRCHTML
 	else
@@ -356,9 +356,13 @@ for SET in $PLUGINSETS; do
     echo "../${DIR##*/}|$DESCR"
 done >> navigation.tmp
 echo "../index.html#plugintypes|By Plugin Type|t" >> navigation.tmp
+IFS="|"
 for TYPE in $PLUGINTYPES; do
-    echo "../$(echo $TYPE | tr [:upper:] [:lower:])s.html|$TYPE"
+    PTYPE=${TYPE%%:*}
+    DESCR=${TYPE##*:}
+    echo "../$(echo $PTYPE | tr [:upper:] [:lower:])s.html|$PTYPE"
 done >> navigation.tmp
+IFS="$SAVEIFS"
 
 # plugin index:
 echo "create plugin set main index ... "
@@ -376,9 +380,13 @@ while read INDEXLINE; do
 	echo "</ul>"
     elif [ $(expr match "$INDEXLINE" "PLUGINTYPES.*") -gt 0 ]; then
 	echo "<ul>"
+	IFS="|"
 	for PLUGINTYPE in $PLUGINTYPES; do
-	    echo "  <li><a href=\"$(echo $PLUGINTYPE | tr [:upper:] [:lower:])s.html\">$PLUGINTYPE</li>"
+	    PTYPE=${PLUGINTYPE%%:*}
+	    DESCR=${PLUGINTYPE##*:}
+	    echo "  <li><a href=\"$(echo $PTYPE | tr [:upper:] [:lower:])s.html\">$PTYPE:</a> <span class=\"brief\">$DESCR</span></li>"
 	done
+	IFS="$SAVEIFS"
 	echo "</ul>"
     else
 	echo "$INDEXLINE"
@@ -402,12 +410,14 @@ for SET in $PLUGINSETS; do
     {
 	echo "<h2>$DESCR Plugins</h2>"
 	echo ""
+	# brief description:
 	if [ -f $RELACSBASE/plugins/$DIR/doc/${DIR##*/}.doc ]; then
 	    echo "<p>"
 	    sed -n '/\\brief/{s/\\brief //; p}' $RELACSBASE/plugins/$DIR/doc/${DIR##*/}.doc
 	    echo "</p>"
 	    echo ""
 	fi
+	# plugin list:
 	if [ -d $RELACSBASE/plugins/$DIR/help ]; then
 	    echo "<ul>"
 	    for PLUGIN in $RELACSBASE/plugins/$DIR/help/*.html; do
@@ -427,7 +437,14 @@ for SET in $PLUGINSETS; do
 	else
 	    echo "<p>Sorry - no plugin descriptions available!</p>"
 	fi
-
+	# detailed description:
+	sed -n -e '/<h2/,/<hr/p;' $RELACSBASE/plugins/$DIR/doc/html/index.html | sed -e '1s/^.*<h2/<h2/; $s/<hr.*$//; s/<pre/\n<pre/; s/<h/\n<h/; s/<\(\/\?\)h4/<\1h5/; s/<\(\/\?\)h3/<\1h4/; s/<\(\/\?\)h2/<\1h3/;' > tmp.txt
+	if [ "$(cat tmp.txt | wc -l)" -gt 0 ]; then
+	    echo ""
+	    cat tmp.txt
+	    echo ""
+	fi
+	rm -f tmp.txt
     } > $WEBBASE/plugins/${DIR##*/}/index.html
     cp navigation.tmp $WEBBASE/plugins/menu.dat 
     createhtml plugins/${DIR##*/}/index.html "RELACS - $DESCR Plugins" "plugins" "../index.html" "../${DIR##*/}"
@@ -436,11 +453,19 @@ for SET in $PLUGINSETS; do
 done
 
 # plugin type lists:
+IFS="|"
 for PLUGINTYPE in $PLUGINTYPES; do
-    echo "create $PLUGINTYPE plugins index ... "
-    PLUGINLABEL=$(echo $PLUGINTYPE | tr [:upper:] [:lower:])
+    IFS="$SAVEIFS"
+    PTYPE=${PLUGINTYPE%%:*}
+    DESCR=${PLUGINTYPE##*:}
+    echo "create $PTYPE plugins index ... "
+    PLUGINLABEL=$(echo $PTYPE | tr [:upper:] [:lower:])
     PLUGINFILE=${PLUGINLABEL}s.html
     {
+	echo "<h2>$PTYPE Plugins</h2>"
+	echo
+	echo "<p>$DESCR</p>"
+	echo
 	echo "<ul>"
 	while read DIR NAME DESCR; do
 	    PLUGINSET=""
@@ -457,9 +482,11 @@ for PLUGINTYPE in $PLUGINTYPES; do
 	echo "</ul>"
     } > $WEBBASE/plugins/$PLUGINFILE
     sed 's|\.\./||' navigation.tmp > $WEBBASE/plugins/menu.dat 
-    createhtml "plugins/$PLUGINFILE" "RELACS - $PLUGINTYPE Plugins" "plugins" "index.html" "$PLUGINFILE"
+    createhtml "plugins/$PLUGINFILE" "RELACS - $PTYPE Plugins" "plugins" "index.html" "$PLUGINFILE"
     rm $WEBBASE/plugins/$PLUGINFILE
+    IFS="|"
 done
+IFS="$SAVEIFS"
 
 rm -f *plugins.dat
 rm navigation.tmp
