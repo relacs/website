@@ -20,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
   border-top-width: 1px;
   border-style: solid;
   border-color: #AAAAFF;
-  clear: none;
+  clear: both;
 }
 
 h1 {
@@ -195,7 +195,7 @@ table.layout {
   margin: 0px;
   margin-right: 1ex;
   padding: 0.5ex;
-  width: 9.5em;
+  width: 10em;
 }
 
 .navigation ul { 
@@ -268,16 +268,16 @@ table.layout {
 }
 
 .content .figure { 
-  background-color: #EEEEFF;
   border: 1px solid #AAAAFF;
   margin-top: 0.5ex;
   margin-bottom: 1.5ex;
+  background-color: white;
 }
 
 .content .figure .image { 
-  float: left;
   margin: 1ex;
-  border: 1px solid #AAAAFF;
+  border: none;
+  background-color: white;
 }
 
 .content .figure .image img { 
@@ -291,6 +291,10 @@ table.layout {
   margin: 1ex;
   padding: 0.5ex;
   background-color: white;
+}
+
+.content .figure .bottom { 
+  clear: both;
 }
 
 .content .figureright { 
@@ -321,6 +325,10 @@ table.layout {
   background-color: white;
 }
 
+.content .figureright .bottom { 
+  clear: both;
+}
+
 .content ul, .content ol, .content dl {
   margin-top: 0ex;
   margin-bottom: 0ex;
@@ -349,11 +357,6 @@ table.layout {
 }
 
 .content dl dd p {
-  margin-left: 0ex;
-  padding-left: 0px;
-}
-
-.content dl dd ul {
   margin-left: 0ex;
   padding-left: 0px;
 }

@@ -30,24 +30,97 @@
     From <a href="publications/Benda2007abstract.html">
     Benda et al. 2007</a>.
   </div>
+  <div class="bottom"></div>
 </div>
 
-<ul>
-  <li><a href="features#closedloop">Closed-loop experiments</a></li>
-  <li><a href="plugins">C++ plugins for powerful flexibility</a></li>
-  <li><a href="features#model">Integrating experiments and model simulations</a></li>
-  <li><a href="features#hardware">Hardware independence</a></li>
-<!-- <li><a href="features#threads">Multi-threaded design</a></li> -->
-  <li><a href="features#analysis">Data-analysis library</a></li>
-  <li><a href="features#metadata">Meta-data</a></li>
-  <li><a href="features#free">Free software</a></li>
-</ul>
-
 <p>
-  We are using this program very succesfully in our lab
+The main reason for developing <span class="relacs">relacs</span>
+was to create a platform for implementing
+</p>
+<ul>
+  <li><a href="features/index.html#closedloop">Closed-loop experiments.</a></li>
+</ul>
+<p>
+  <span class="relacs">relacs</span> offers many more
+  features, that sets it apart from other data acquisition software:
+</p>
+<ul>
+  <li><a href="features/index.html#model">Integration of experiments and model simulations</a></li>
+  <li><a href="features/index.html#hardware">Hardware independence</a></li>
+  <li><a href="features/index.html#metadata">Meta-data storage</a></li>
+</ul>
+<p>
+In addition, <span class="relacs">relacs</span> provides:
+</p>
+<ul>
+  <li><a href="plugins">C++ plugins for powerful flexibility</a></li>
+  <li><a href="features/index.html#analysis">Data-analysis library</a></li>
+</ul>
+<p>
+  We are using this program very succesfully in our lab for many years
   (see <a href="publications/index.html">list of publications</a>).
 </p>
 
+
+<a name="specifications"></a>
+<h3>Specifications</h3>
+<dl>
+  <dt>Open source</dt>
+  <dd>
+    <span class="relacs">relacs</span> is programmed in C++:
+    <ul>
+      <li>145 header files</li>
+      <li>155 C++ source code files</li>
+      <li>Altogether 121919 lines of codes and inline documentation</li>
+    </ul>
+  </dd>
+  <dd>
+    <span class="relacs">relacs</span> is published under the 
+    <a href="http://www.gnu.org/licenses/gpl.html">GPL</a>.
+    <a href="features/index.html#free">More ...</a>
+  </dd>
+
+  <dt>Sweep-based quasi-continuous acquisition</dt>
+  <dd>
+    Stimulation (analog output) and data-recording (analog input)
+    are started simultaneously for each stimulus to ensure
+    best synchronization, but data are recorded all the time
+    and can be viewed continuously.
+  </dd>
+
+  <dt>Multi-threaded design</dt>
+  <dd>
+    The acquisition of the data, filtering and spike detection, data analysis
+    and stimulus generation, and GUI interaction are running in parallel as
+    different threads. This way, <span class="relacs">relacs</span> makes use
+    of the computing power of multi-processor machines and therefore pushes 
+    the applicability of closed-loop algorithms to much larger data volumes, 
+    as they are acquired from multi-unit recordings, for example.
+  </dd>
+
+  <dt>Seamless integration of attenuators</dt>
+  <dd>
+    For adjusting the amplitude of a stimulus and still make use of the
+    full resolution of the data aquisition board one can use digitally
+    controlled attenuators. This is especially usefull for acoustic stimuli.
+    <span class="relacs">relacs</span> uses two levels of abstraction
+    to support attenuators. First, the 
+    <a href="plugins/attenuators.html">Attenuator device interface</a> provides
+    an unique interface to various attenuator device types.
+    Second, the <a href="plugins/attenuates.html">Attenuate interface</a>
+    translates an intensity variable to the appropriate attenuation level.
+    How the intensity variable is interpreted (e.g. as dB SPL or sound pressure)
+    depends on the implementation of the <a href="plugins/attenuates.html">Attenuate interface</a>
+    as well as on the corresponding calibration program.
+  </dd>
+
+<!--
+  <dt></dt>
+  <dd>
+  </dd>
+-->
+
+</dl>
 
 <a name="news"></a>
 <h3>News</h3>

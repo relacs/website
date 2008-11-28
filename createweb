@@ -154,7 +154,7 @@ function createhtml
 		local HTMLBODYSPACE="${HTMLSPACES}"
 		test "$BODYPRE" = "yes" && HTMLBODYSPACE=""
 		echo "${HTMLBODYSPACE}${BODYLINE}"
-		[ $(expr match "$BODYLINE" ".*<pre .*>.*") -gt 0 ] && BODYPRE="yes"
+		[ $(expr match "$BODYLINE" ".*<pre.*>.*") -gt 0 ] && BODYPRE="yes"
 		[ $(expr match "$BODYLINE" ".*</pre>.*") -gt 0 ] && BODYPRE="no"
 	    done < $WEBBASE/$SRCHTML
 	else
@@ -241,7 +241,7 @@ while read LINE; do
     fi
 done < $WEBBASE/index.tmpl > $WEBBASE/index.html
 IFS="$SAVEIFS"
-createhtml index.html "RELACS - Enjoy your recordings" "." "no"
+createhtml index.html "RELACS ... enjoy your recordings" "." "no"
 rm $WEBBASE/index.html
 
 # README, INSTALL:

@@ -47,6 +47,10 @@ p {
   background-color: white;
 }
 
+.figure .bottom { 
+  clear: both;
+}
+
 .figureright { 
   float: right;
   background-color: #EEEEFF;
