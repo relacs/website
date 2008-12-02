@@ -127,6 +127,10 @@ span.relacs {
   padding: 10px;
 }
 
+.header .titles { 
+  min-height: 225px;
+}
+
 .header h1, .header h2, .header h3, .header h4, .header h5, .header h6 { 
   font-style: italic;
   padding-left: 200px;
@@ -167,8 +171,11 @@ span.relacs {
 }
 
 .header h2 { 
-  font-size: 180%;
+  font-size: 30px;
   font-weight: normal;
+  padding-top: 10px; 
+  padding-bottom: 8px; 
+  min-height: 70px;
 }
 
 .header h2 b { 
@@ -177,8 +184,11 @@ span.relacs {
 
 .header h3 { 
   font-family: arial, helvetica, sans-serif;
-  font-size: 120%;
+  font-size: 22px;
   font-weight: normal;
+  padding-top: 10px; 
+  padding-bottom: 8px; 
+  min-height: 30px;
 }
 
 table.layout { 
