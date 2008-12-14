@@ -27,8 +27,10 @@ ephys:EPhys \
 acoustic:Acoustic \
 auditory:Auditory \
 auditoryprojects:Auditory-Projects \
-patchclamp:Patch-Clamp \
-linuxdevices/comedi:Comedi \
+patchclamp:Patch-Clamp"
+
+# directories and descriptions of device plugin sets:
+DEVICEPLUGINSETS="linuxdevices/comedi:Comedi \
 linuxdevices/nieseries:NI-ESeries \
 linuxdevices/attcs3310:Att-CS3310 \
 linuxdevices/misc:Miscellaneous"
@@ -39,14 +41,17 @@ Control:General information about recording, passive analysis.|\
 Filter:Filters analog input traces and events.|\
 Detector:Detects events (e.g.spikes) in analog input traces and events.|\
 Model:A model for the simulation mode.|\
-AnalogInput:Interface to the data acquisition board.|\
-AnalogOutput:Interface to the data acquisition board.|\
-Attenuator:Interface to attenuator hardware.|\
+ModelLib:Libraries to be used by model plugins.|\
+Lib:Libraries to be used by other plugins."
+
+# names of plugin types:
+DEVICEPLUGINTYPES="AnalogInput:Record data from the analog input channels of the data acquisition board.|\
+AnalogOutput:Write stimuli to the analog output channels of the data acquisition board.|\
+Attenuator:Sets a requested attenuaten level.|\
 Attenuate:Specifies attenuation of single output channels.|\
 Manipulator:Controls motorized manipulators.|\
 Temperature:Measures temperatures.|\
-Device:Any other device.|\
-Lib:Libraries to be used by other plugins."
+Device:Any other device."
 
 # clean previous web site:
 CLEANALL="no"
@@ -349,58 +354,40 @@ if test $DOPLUGINS = yes; then
 
 # plugin navigation:
 echo "extract plugin set navigation ... "
-echo "../index.html#pluginsets|By Plugin Set|t" > navigation.tmp
-for SET in $PLUGINSETS; do
-    DIR=${SET%%:*}
-    DESCR=${SET##*:}
-    echo "../${DIR##*/}|$DESCR"
-done >> navigation.tmp
-echo "../index.html#plugintypes|By Plugin Type|t" >> navigation.tmp
-IFS="|"
-for TYPE in $PLUGINTYPES; do
-    PTYPE=${TYPE%%:*}
-    DESCR=${TYPE##*:}
-    echo "../$(echo $PTYPE | tr [:upper:] [:lower:])s.html|$PTYPE"
-done >> navigation.tmp
-IFS="$SAVEIFS"
-
-# plugin index:
-echo "create plugin set main index ... "
-IFS=""
-while read INDEXLINE; do
-    IFS="$SAVEIFS"
-    if [ $(expr match "$INDEXLINE" "PLUGINSETS.*") -gt 0 ]; then
-	echo "<ul>"
-	for SET in $PLUGINSETS; do
-	    DIR=${SET%%:*}
-	    DESCR=${SET##*:}
-	    INTRO="$(sed -n '/\\brief/{s/\\brief //; p}' $RELACSBASE/plugins/$DIR/doc/${DIR##*/}.doc)"
-	    echo "  <li><a href=\"${DIR##*/}\">$DESCR:</a> <span class=\"brief\">$INTRO</span></li>"
-	done
-	echo "</ul>"
-    elif [ $(expr match "$INDEXLINE" "PLUGINTYPES.*") -gt 0 ]; then
-	echo "<ul>"
-	IFS="|"
-	for PLUGINTYPE in $PLUGINTYPES; do
-	    PTYPE=${PLUGINTYPE%%:*}
-	    DESCR=${PLUGINTYPE##*:}
-	    echo "  <li><a href=\"$(echo $PTYPE | tr [:upper:] [:lower:])s.html\">$PTYPE:</a> <span class=\"brief\">$DESCR</span></li>"
-	done
-	IFS="$SAVEIFS"
-	echo "</ul>"
-    else
-	echo "$INDEXLINE"
-    fi
-    IFS=""
-done < $WEBBASE/plugins/index.tmpl > $WEBBASE/plugins/index.html
-IFS="$SAVEIFS"
-sed 's|\.\./||' navigation.tmp > $WEBBASE/plugins/menu.dat 
-createhtml plugins/index.html "RELACS - Plugins" "plugins" "no"
-rm $WEBBASE/plugins/index.html
+{
+  echo "../index.html#pluginsets|By Plugin Set|t"
+  for SET in $PLUGINSETS; do
+      DIR=${SET%%:*}
+      DESCR=${SET##*:}
+      echo "../${DIR##*/}|$DESCR"
+  done
+  IFS="|"
+  echo "../index.html#plugintypes|By Plugin Type|t"
+  for TYPE in $PLUGINTYPES; do
+      PTYPE=${TYPE%%:*}
+      DESCR=${TYPE##*:}
+      echo "../$(echo $PTYPE | tr [:upper:] [:lower:])s.html|$PTYPE"
+  done
+  IFS="$SAVEIFS"
+  echo "../index.html#devicesets|By Device Set|t"
+  for SET in $DEVICEPLUGINSETS; do
+      DIR=${SET%%:*}
+      DESCR=${SET##*:}
+      echo "../${DIR##*/}|$DESCR"
+  done
+  IFS="|"
+  echo "../index.html#devicetypes|By Device Type|t"
+  for TYPE in $DEVICEPLUGINTYPES; do
+      PTYPE=${TYPE%%:*}
+      DESCR=${TYPE##*:}
+      echo "../$(echo $PTYPE | tr [:upper:] [:lower:])s.html|$PTYPE"
+  done
+  IFS="$SAVEIFS"
+} > navigation.tmp
 
 # plugin descriptions:
 rm -f *plugins.dat
-for SET in $PLUGINSETS; do
+for SET in $PLUGINSETS $DEVICEPLUGINSETS; do
     DIR=${SET%%:*}
     DESCR=${SET##*:}
     echo "create index for plugin set $DESCR ... "
@@ -454,7 +441,7 @@ done
 
 # plugin type lists:
 IFS="|"
-for PLUGINTYPE in $PLUGINTYPES; do
+for PLUGINTYPE in $PLUGINTYPES $DEVICEPLUGINTYPES; do
     IFS="$SAVEIFS"
     PTYPE=${PLUGINTYPE%%:*}
     DESCR=${PLUGINTYPE##*:}
@@ -487,6 +474,51 @@ for PLUGINTYPE in $PLUGINTYPES; do
     IFS="|"
 done
 IFS="$SAVEIFS"
+
+# plugin index:
+echo "create plugin set main index ... "
+IFS=""
+while read INDEXLINE; do
+    IFS="$SAVEIFS"
+    if [ $(expr match "$INDEXLINE" ".*PLUGINSETS.*") -gt 0 ]; then
+	echo "<ul>"
+	PLUGINSETSLIST="$PLUGINSETS"
+	if [ $(expr match "$INDEXLINE" "DEVICEPLUGINSETS.*") -gt 0 ]; then
+	    PLUGINSETSLIST="$DEVICEPLUGINSETS"
+	fi
+	for SET in $PLUGINSETSLIST; do
+	    DIR=${SET%%:*}
+	    DESCR=${SET##*:}
+  	    NUM=$(ls $RELACSBASE/plugins/$DIR/help/*.html | wc -l)
+	    INTRO="$(sed -n '/\\brief/{s/\\brief //; p}' $RELACSBASE/plugins/$DIR/doc/${DIR##*/}.doc)"
+	    echo "  <li><a href=\"${DIR##*/}\">$DESCR ($NUM):</a> <span class=\"brief\">$INTRO</span></li>"
+	done
+	echo "</ul>"
+    elif [ $(expr match "$INDEXLINE" ".*PLUGINTYPES.*") -gt 0 ]; then
+	echo "<ul>"
+	PLUGINTYPESLIST="$PLUGINTYPES"
+	if [ $(expr match "$INDEXLINE" "DEVICEPLUGINTYPES.*") -gt 0 ]; then
+	    PLUGINTYPESLIST="$DEVICEPLUGINTYPES"
+	fi
+	IFS="|"
+	for PLUGINTYPE in $PLUGINTYPESLIST; do
+	    PTYPE=${PLUGINTYPE%%:*}
+	    PLUGINLABEL=$(echo $PTYPE | tr [:upper:] [:lower:])
+	    DESCR=${PLUGINTYPE##*:}
+            NUM=$(cat ${PLUGINLABEL}plugins.dat | wc -l)
+	    echo "  <li><a href=\"$(echo $PTYPE | tr [:upper:] [:lower:])s.html\">$PTYPE ($NUM):</a> <span class=\"brief\">$DESCR</span></li>"
+	done
+	IFS="$SAVEIFS"
+	echo "</ul>"
+    else
+	echo "$INDEXLINE"
+    fi
+    IFS=""
+done < $WEBBASE/plugins/index.tmpl > $WEBBASE/plugins/index.html
+IFS="$SAVEIFS"
+sed 's|\.\./||' navigation.tmp > $WEBBASE/plugins/menu.dat 
+createhtml plugins/index.html "RELACS - Plugins" "plugins" "no"
+rm $WEBBASE/plugins/index.html
 
 rm -f *plugins.dat
 rm navigation.tmp

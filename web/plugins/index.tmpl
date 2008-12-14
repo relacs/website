@@ -6,18 +6,62 @@
   and they allow you to implement experimental protocols, filters,
   spike detectors, etc.
 </p>
+<p>
+  The plugins can be grouped into high-level plugins and device plugins.
+  In the following, plugins of both groups are sorted by either the
+  plugins set they belong to or their type.
+</p>
+
+
+<h3>High-Level Plugins</h3>
+<p>
+  High-level plugins work on data and/or generate data
+  independently of the hardware.
+</p>
 
 <a name="pluginsets"></a>
-<h3>Plugin Sets</h3>
+<h4>High-Level Plugin Sets</h4>
 <p>
   The plugins come in sets that contain plugins for a specific
   experimental setting:
 </p>
+<p>
+  Most of these plugin sets (not the "basic plugins")
+  come with a demo configuration and macro file.
+  Simply cd to the base directory of the plugin set
+  (below the <code>plugins/</code> directory)
+  and run
+</p>
+<pre>
+$> ./relacslocal -3</pre>
+<p>
+  from there for a demo.
+</p>
 PLUGINSETS
 
 <a name="plugintypes"></a>
-<h3>Plugin Types</h3>
+<h4>High-Level Plugin Types</h4>
 <p>
-  Here is a list of all plugins sorted by their type:
+  The same plugins as from the previous section but sorted by their type:
 </p>
 PLUGINTYPES
+
+
+<h3>Device Plugins</h3>
+<p>
+  The device plugins make differrent devices available to <span class="relacs">relacs</span>.
+</p>
+
+<a name="devicesets"></a>
+<h4>Device-Plugin Sets</h4>
+<p>
+  Plugins for specific hardware families also come in sets:
+</p>
+DEVICEPLUGINSETS
+
+<a name="devicetypes"></a>
+<h4>Device-Plugin Types</h4>
+<p>
+  The same plugins as from the previous section but sorted by their type:
+</p>
+DEVICEPLUGINTYPES

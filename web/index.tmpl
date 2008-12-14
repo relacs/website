@@ -87,15 +87,19 @@ In addition, <span class="relacs">relacs</span> provides:
     best synchronization, but data are recorded all the time
     and can be viewed continuously.
   </dd>
-
-  <dt>Multi-threaded design</dt>
   <dd>
-    The acquisition of the data, filtering and spike detection, data analysis
-    and stimulus generation, and GUI interaction are running in parallel as
-    different threads. This way, <span class="relacs">relacs</span> makes use
-    of the computing power of multi-processor machines and therefore pushes 
-    the applicability of closed-loop algorithms to much larger data volumes, 
-    as they are acquired from multi-unit recordings, for example.
+    <span class="relacs">relacs</span> is optimized for up to about 10
+    input traces. More traces might be possible, but would require a
+    different visualization widget.
+  </dd>
+
+  <dt>Stimulation via analog output channels</dt>
+  <dd>
+    The neuron (or whatever system) can be stimulated via the analog
+    output channels of the data acquisition boards with continuous 
+    freely programmable waveforms. Depending on the hardware of your
+    experimental setup this can be, for example, a current injected
+    into the cell, a sound wave, an electric field, ...
   </dd>
 
   <dt>Seamless integration of attenuators</dt>
@@ -112,6 +116,16 @@ In addition, <span class="relacs">relacs</span> provides:
     How the intensity variable is interpreted (e.g. as dB SPL or sound pressure)
     depends on the implementation of the <a href="plugins/attenuates.html">Attenuate interface</a>
     as well as on the corresponding calibration program.
+  </dd>
+
+  <dt>Multi-threaded design</dt>
+  <dd>
+    The acquisition of the data, filtering and spike detection, data analysis
+    and stimulus generation, and GUI interaction are running in parallel as
+    different threads. This way, <span class="relacs">relacs</span> makes use
+    of the computing power of multi-processor machines and therefore pushes 
+    the applicability of closed-loop algorithms to much larger data volumes, 
+    as they are acquired from multi-unit recordings, for example.
   </dd>
 
 <!--
