@@ -1,7 +1,7 @@
-reference|User manual
+userman|User manual
 ../plugins|Plugins
-reference/classes.html|API reference
-reference/relacsprogram.html|Internals
+api|API reference
+userman/relacsprogram.html|Internals
 readme.html|README
 install.html|INSTALL
 changelog.html|ChangeLog

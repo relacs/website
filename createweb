@@ -198,10 +198,11 @@ for file in $(find $WEBBASE/publications -name '*abstract.html') $(find $WEBBASE
     cp -p $file $WEBDEST/${file#$WEBBASE/}
 done
 
-# link to documentation:
-echo "create link to RELACS documentation ... "
+# links to documentation:
+echo "create links to RELACS documentation ... "
 cd $WEBDEST/doc
-test -f reference || ln -f -s ../../$RELACSBASE/doc/html reference
+test -f api || ln -f -s ../../$RELACSBASE/doc/html api
+test -f userman || ln -f -s ../../$RELACSBASE/doc/userman/html userman
 cd - > /dev/null
 
 # translate other index.html files:
