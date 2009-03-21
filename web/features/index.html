@@ -88,33 +88,6 @@
 </p>
 
 
-<a name="model"></a>
-<h3>Integration of experiment and model simulations</h3>
-<p>
-  Besides acquiring data from a real experiment,
-  <span class="relacs">relacs</span> can also run in a simulation mode,
-  where the data are acquired from a model simulation.
-  This is a very important feature, that sets <span class="relacs">relacs</span> apart
-  from many other data acquisition software:
-</p>
-<ol>
-  <li>For developing advanced and optimized closed-loop
-  experimental protocols, the simulation mode is essential to properly
-  develop and test them in advance before they are applied
-  to an experiment.</li>
-
-  <li>The simulation mode allows to test both, the real neuron
-  and a model, with exactly the same experimental protocols.
-  This is advantageous for model development close to
-  experimental data.</li>
-
-</ol>
-<p>
-  Models can be implemented as a <a href="../plugins/models.html">Model plugin</a>
-  for <span class="relacs">relacs</span>.
-</p>
-
-
 <a name="hardware"></a>
 <h3>Hardware-independent experimental protocols</h3>
 <p>
@@ -164,13 +137,71 @@
 <p>
   Very important for enhancing the reusability of acquired data
   is their annotation with all sorts of meta-data that
-  specify the context of the experiment.
+  specify the context and the details of the experiment.
   Upon completion of a recording, <span class="relacs">relacs</span> immediately forces the
   experimenter to provide this important information
   through a freely configurable dialog.
   In addition, for each recording all configuration files, log files, and
-  version numbers and settings of the experimental protocols are saved
-  as well.
+  settings of the experimental protocols are saved as well.
+</p>
+<p>
+  We are currently working on developing a standard for sharing meta
+  data of electrophysiological experiments (supported by <a
+  href="http://www.g-node.de/">G-Node</a>).  Specifically, in
+  collaboration with the <a
+  href="http://lablog.sourceforge.net">LabLog</a> project we work on a
+  solution for directly storing the meta-data acquired by <span
+  class="relacs">relacs</span> into a data-base .
+</p>
+
+
+<a name="dynclamp"></a>
+<h3>Dynamic clamp</h3>
+<p>
+  The dynamic clamp is a technique that is used in the neurosciences
+  to artificially introduce ionic conductances to a neuron.
+  This is accomplished by a closed-loop system running on a per-sample basis.
+  First, a voltage value is read in.
+  Then, a current is computed depending on that voltage.
+  Finally, this current is injected back into the cell.
+</p>
+<p>
+  Dynamic clamp can be easily added to <span class="relacs">relacs</span>
+  by providing a specific implementation of the AnanlogInput and AnalogOutput
+  device classes.
+
+  Currently, an implementation based on <a
+  href=""http://www.rtai.org"">RTAI</a> real-time Linux and <a
+  href="http://www.comedi.org">comedi</a> for accessing data
+  acquisition boards is provided (<a href="../plugins/comedi/Comedi-DynClampAnalogInput.html">DynClampAnalogInput</a>
+  and <a href="../plugins/comedi/Comedi-DynClampAnalogOutput.html">DynClampAnalogOutput</a>).
+</p>
+
+
+<a name="model"></a>
+<h3>Integration of experiment and model simulations</h3>
+<p>
+  Besides acquiring data from a real experiment,
+  <span class="relacs">relacs</span> can also run in a simulation mode,
+  where the data are acquired from a model simulation.
+  This is a very important feature, that sets <span class="relacs">relacs</span> apart
+  from many other data acquisition software:
+</p>
+<ol>
+  <li>For developing advanced and optimized closed-loop
+  experimental protocols, the simulation mode is essential to properly
+  develop and test them in advance before they are applied
+  to an experiment.</li>
+
+  <li>The simulation mode allows to test both, the real neuron
+  and a model, with exactly the same experimental protocols.
+  This is advantageous for model development close to
+  experimental data.</li>
+
+</ol>
+<p>
+  Models can be implemented as a <a href="../plugins/models.html">Model plugin</a>
+  for <span class="relacs">relacs</span>.
 </p>
 
 

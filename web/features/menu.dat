@@ -1,6 +1,7 @@
 #closedloop|Closed-loop experiments
-#model|Model simulations
 #hardware|Hardware independence
 #analysis|Data-analysis library
 #metadata|Meta-data
+#dynclamp|Dynamic clamp
+#model|Model simulations
 #free|Free software
