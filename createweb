@@ -401,7 +401,7 @@ for SET in $PLUGINSETS $DEVICEPLUGINSETS; do
 	# brief description:
 	if [ -f $RELACSBASE/plugins/$DIR/doc/${DIR##*/}.doc ]; then
 	    echo "<p>"
-	    sed -n '/\\brief/{s/\\brief //; p}' $RELACSBASE/plugins/$DIR/doc/${DIR##*/}.doc
+	    sed -n '/\\brief/{s/\\brief //; s/%//; p}' $RELACSBASE/plugins/$DIR/doc/${DIR##*/}.doc
 	    echo "</p>"
 	    echo ""
 	fi
@@ -491,7 +491,7 @@ while read INDEXLINE; do
 	    DIR=${SET%%:*}
 	    DESCR=${SET##*:}
   	    NUM=$(ls $RELACSBASE/plugins/$DIR/help/*.html | wc -l)
-	    INTRO="$(sed -n '/\\brief/{s/\\brief //; p}' $RELACSBASE/plugins/$DIR/doc/${DIR##*/}.doc)"
+	    INTRO="$(sed -n '/\\brief/{s/\\brief //; s/%//; p}' $RELACSBASE/plugins/$DIR/doc/${DIR##*/}.doc)"
 	    echo "  <li><a href=\"${DIR##*/}\">$DESCR ($NUM):</a> <span class=\"brief\">$INTRO</span></li>"
 	done
 	echo "</ul>"
@@ -530,5 +530,9 @@ fi
 echo
 echo "Ready! You find the relacs website in $WEBDEST"
 echo "Update the public website with"
-echo "  rsync -avz relacsweb/ janbenda,relacs@web.sourceforge.net:htdocs/"
+echo "  rsync -rlptvz relacsweb/ janbenda,relacs@web.sourceforge.net:htdocs/"
+echo "Update the public API reference with"
+echo "  rsync -rLptvz ../relacs/trunk/doc/html/ janbenda,relacs@web.sourceforge.net:htdocs/doc/api/"
+echo "Update the public user manual with"
+echo "  rsync -rlptvz ../relacs/trunk/doc/userman/html/ janbenda,relacs@web.sourceforge.net:htdocs/doc/userman/"
 

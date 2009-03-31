@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Benda 2009: Abstract</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+    <link rel="stylesheet" type="text/css" href="relacspublications.css">
+  </head>
+
+  <body>
+    <h1>RELACS - a modular software platform for closed-loop and dynamic clamp experiments</h1>
+    <h3>Jan Benda</h3>
+    <h3>32th G&ouml;ttingen Neurobiology Conference, 2009</h3>
+    <h3><a href="Benda2009.pdf">[PDF]</a>&nbsp;</h3>
+
+    <h2>Abstract</h2>
+
+    <p>
+      Relacs ("Relaxed ELectrophysiological data Acquisition, Control,
+      and Stimulation") is a fully customizable software platform for
+      data acquisition, online analysis, and stimulus generation
+      specifically designed for electrophysiological
+      recordings. Filters and spike detectors can be applied instantly
+      on the recorded potentials. Freely programmable, hardware
+      independent C++ plugins can access the preprocessed data for
+      further online analysis and visualization. Therefore the
+      experimental protocols can automatically adapt a stimulus
+      (e.g. offset, variance, etc.) in a closed loop fashion and thus
+      completely control the running experiment.  For programming the
+      experimental protocols, the Relacs package also provides a data
+      analysis library containing algorithms for basic statistics
+      (moments, quartiles, histogram), power spectra, coherence,
+      transfer function, linear fits, non-linear fits (Simplex,
+      Levenberg-Marquardt), firing rates (mean, PSTH binned/kernel,
+      1/ISI), CV, Fano factor, ISI correlations, vector strength,
+      reliability, jitter, mutual information (lower and upper bound),
+      etc.  A simulation mode not only allows to test and improve the
+      experimental protocols, but also to check the performance of
+      models with the very same procedures that were used in the real
+      electrophysiological experiments.
+    </p>
+
+    <p>
+      The dynamic clamp is a closed-loop experiment on a per sample
+      basis where each sampled value of the cell's membrane potential
+      is used to compute a current that is injected back into the
+      cell. Relacs supports software dynamic clamp, i.e. no additional
+      hardware is needed, that is implemented as an RTAI real time
+      Linux kernel module. For using the full potential of
+      discontinuous current-clamp amplifiers for the dynamic clamp we
+      are synchronizing the switching cycle of an npi SEC amplifier
+      with the software loop (in collaboration with H. R. Polder, npi
+      electronic GmbH, Tamm, Germany).
+    </p>
+
+    <p>
+      Very important for enhancing the reusability of acquired data is
+      their annotation with meta-data that specify the context of the
+      experiment. Upon completion of a recording, Relacs immediately
+      forces the experimenter to provide this important information
+      through a freely configurable dialog. In addition, for each
+      recording all configuration files, log files, and version
+      numbers and settings of the experimental protocols are saved as
+      well. All the meta-data can be automatically stored in LabLog
+      (see Poster by Jan Grewe) for enhancing reusability of the
+      recorded data.
+    </p>
+
+    <p>
+      Relacs is free and open software published under the GPL to
+      foster development and exchange of innovative experimental
+      protocols and analysis techniques. In particular, Relacs will be
+      a test bed for the data analysis toolboxes and data format
+      interfaces from the German Neuroinformatics Node (<a
+      href="www.g-node.org">www.g-node.org</a>).  For more information
+      and downloads visit <a href="www.relacs.net">www.relacs.net</a>.
+    </p>
+
+    <hr>
+<!-- Created: Wed Aug 22 09:58:47 CEST 2007 -->
+<!-- hhmts start -->
+Last modified: Tue Mar 31 21:41:30 CEST 2009
+<!-- hhmts end -->
+  </body>
+</html>
