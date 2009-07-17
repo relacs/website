@@ -27,6 +27,7 @@ ephys:EPhys \
 acoustic:Acoustic \
 auditory:Auditory \
 auditoryprojects:Auditory-Projects \
+efield:E-Fields \
 patchclamp:Patch-Clamp"
 
 # directories and descriptions of device plugin sets:
@@ -47,6 +48,7 @@ Lib:Libraries to be used by other plugins."
 # names of plugin types:
 DEVICEPLUGINTYPES="AnalogInput:Record data from the analog input channels of the data acquisition board.|\
 AnalogOutput:Write stimuli to the analog output channels of the data acquisition board.|\
+DigitalIO:Digital I/O lines of the data acquisition board.|\
 Attenuator:Sets a requested attenuaten level.|\
 Attenuate:Specifies attenuation of single output channels.|\
 Manipulator:Controls motorized manipulators.|\
