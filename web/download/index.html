@@ -74,7 +74,8 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
   However, since it is coded in
   standard C++ and uses the Qt-library for the GUI,
   a port to Mac OS X and Windows should be possible.
-  For this, it would be helpful to change to Qt version 4 first.
+  For this, upgrading to Qt4 would be helpful.
+  We are currently working on this.
   Also, interfaces to the (data acquisition)
   devices need to be implemented for each platform as needed.
   Any help is appreciated!
@@ -88,7 +89,7 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
   <li>GNU autotools</li>
   <li><a href="http://doc.trolltech.com/3.3/">Qt version 3.3</a> (older versions have a bug in the thread support).</li>
   <li><a href="http://www.gnu.org/software/gsl/">Gnu Scientific Library</a> (recommended)</li>
-  <li><a href="http://www.stack.nl/~dimitri/doxygen/">doxygen</a> for generating the documentation</li>
+  <li><a href="http://www.stack.nl/~dimitri/doxygen/">doxygen</a> for generating the documentation (recommended)</li>
 </ul>
 
 <a name="roadmap"></a>
@@ -127,7 +128,8 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
     A couple of new features need to be implemented or finished as
     soon as possible (most of this by spring-summer 2009):
     <ul>
-      <li>Dynamic clamp support</li>
+      <li>Dynamic clamp support (first version is working by now)</li>
+      <li>Upgrade to Qt4</li>
       <li>Data browser</li>
       <li>Plugins for current and voltage clamp recordings</li>
       <li>Update the plugins for the electric fish experiments</li>
