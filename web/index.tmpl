@@ -112,12 +112,15 @@ In addition, <span class="relacs">relacs</span> provides:
     <span class="relacs">relacs</span> uses two levels of abstraction
     to support attenuators. First, the 
     <a href="plugins/attenuators.html">Attenuator device interface</a> provides
-    an unique interface to various attenuator device types.
+    an interface to various attenuator device types.
     Second, the <a href="plugins/attenuates.html">Attenuate interface</a>
     translates an intensity variable to the appropriate attenuation level.
     How the intensity variable is interpreted (e.g. as dB SPL or sound pressure)
     depends on the implementation of the <a href="plugins/attenuates.html">Attenuate interface</a>
     as well as on the corresponding calibration program.
+    This way, one requests a meaningful intensity for a stimulus
+    that is then automatically and hardware-independently translated
+    into an appropriate attenuation level.
   </dd>
 
   <dt>Multi-threaded design</dt>
