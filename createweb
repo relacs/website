@@ -28,7 +28,9 @@ acoustic:Acoustic \
 auditory:Auditory \
 auditoryprojects:Auditory-Projects \
 efield:E-Fields \
-patchclamp:Patch-Clamp"
+efish:E-Fish \
+patchclamp:Patch-Clamp \
+patchclampprojects:Patch-Clamp-Projects"
 
 # directories and descriptions of device plugin sets:
 DEVICEPLUGINSETS="linuxdevices/comedi:Comedi \
