@@ -2,7 +2,7 @@
 
 # Script for creating the relacs website in WEBDEST from the templates
 # in WEBBASE.
-# (c) 2008 by Jan Benda
+# (c) 2008-2010 by Jan Benda
 
 RELACSBASE=../relacs/trunk
 WEBBASE=web
@@ -34,15 +34,14 @@ patchclampprojects:Patch-Clamp-Projects"
 
 # directories and descriptions of device plugin sets:
 DEVICEPLUGINSETS="linuxdevices/comedi:Comedi \
-linuxdevices/nieseries:NI-ESeries \
 linuxdevices/attcs3310:Att-CS3310 \
 linuxdevices/misc:Miscellaneous"
 
 # names of plugin types:
-PLUGINTYPES="RePro:Experimental protocols.|\
-Control:General information about recording, passive analysis.|\
-Filter:Filters analog input traces and events.|\
-Detector:Detects events (e.g.spikes) in analog input traces and events.|\
+PLUGINTYPES="RePro:Research protocols for online data analysis, visualization and stimulus generation.|\
+Control:General information about a recording, passive analysis, and control of additional hardware.|\
+Filter:Filter analog input traces and events.|\
+Detector:Detect events (e.g.spikes) in analog input traces and events.|\
 Model:A model for the simulation mode.|\
 ModelLib:Libraries to be used by model plugins.|\
 Lib:Libraries to be used by other plugins."
@@ -51,10 +50,11 @@ Lib:Libraries to be used by other plugins."
 DEVICEPLUGINTYPES="AnalogInput:Record data from the analog input channels of the data acquisition board.|\
 AnalogOutput:Write stimuli to the analog output channels of the data acquisition board.|\
 DigitalIO:Digital I/O lines of the data acquisition board.|\
-Attenuator:Sets a requested attenuaten level.|\
-Attenuate:Specifies attenuation of single output channels.|\
-Manipulator:Controls motorized manipulators.|\
-Temperature:Measures temperatures.|\
+Trigger:Configure an analog trigger device.|\
+Attenuator:Set a requested attenuation level.|\
+Attenuate:Specify attenuation of single output channels.|\
+Manipulator:Control motorized manipulators.|\
+Temperature:Measure temperatures.|\
 Device:Any other device."
 
 # clean previous web site:
@@ -422,6 +422,7 @@ for SET in $PLUGINSETS $DEVICEPLUGINSETS; do
 		cp navigation.tmp $WEBBASE/plugins/menu.dat 
 		createhtml plugins/${DIR##*/}/$PLUGINFILE "RELACS - $DESCR Plugins: $PLUGINNAME" "plugins" "../index.html"
   	        rm  $WEBBASE/plugins/${DIR##*/}/$PLUGINFILE
+#echo "DEBUG: $PLUGIN ${PLUGINTYPEFILEBASE}" > /dev/stderr
 		echo "${DIR##*/}/$PLUGINFILE $PLUGINNAME $DESCR" >> ${PLUGINTYPEFILEBASE}plugins.dat
 		echo "  <li><a href=\"$PLUGINFILE\">$PLUGINNAME</a>&nbsp;[<a href=\"../${PLUGINTYPEFILEBASE}s.html\">$PLUGINTYPE</a>]: <span class=\"brief\">$(sed -n '/<h2>/,/<p>/p' $PLUGIN | sed '1d; $d;')</span></li>"
 	    done

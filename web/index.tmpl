@@ -55,7 +55,7 @@ In addition, <span class="relacs">relacs</span> provides:
 </p>
 <ul>
   <li><a href="plugins">C++ plugins for powerful flexibility</a></li>
-  <li><a href="features/index.html#analysis">Data-analysis library</a></li>
+  <li><a href="features/index.html#analysis">C++ data-analysis library</a></li>
 </ul>
 <p>
   We are using this program very succesfully in our lab for many years
@@ -70,9 +70,11 @@ In addition, <span class="relacs">relacs</span> provides:
   <dd>
     <span class="relacs">relacs</span> is programmed in C++:
     <ul>
-      <li>145 header files</li>
-      <li>155 C++ source code files</li>
-      <li>Altogether 121919 lines of code and inline documentation</li>
+      <li>187 header files</li>
+      <li>172 C++ source code files</li>
+      <li>altogether 163 553 lines of code and inline documentation
+         (103 690 lines for the <span class="relacs">relacs</span>-core,
+	 56 608 lines for plugins)</li>
     </ul>
   </dd>
   <dd>
@@ -121,16 +123,6 @@ In addition, <span class="relacs">relacs</span> provides:
     This way, one requests a meaningful intensity for a stimulus
     that is then automatically and hardware-independently translated
     into an appropriate attenuation level.
-  </dd>
-
-  <dt>Multi-threaded design</dt>
-  <dd>
-    The acquisition of the data, filtering and spike detection, data analysis
-    and stimulus generation, and GUI interaction are running in parallel as
-    different threads. This way, <span class="relacs">relacs</span> makes use
-    of the computing power of multi-processor machines and therefore pushes 
-    the applicability of closed-loop algorithms to much larger data volumes, 
-    as they are acquired from multi-unit recordings, for example.
   </dd>
 
 <!--

@@ -73,9 +73,7 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
   However, since it is coded in
   standard C++ and uses the Qt-library for the GUI,
   a port to Mac OS X and Windows should be possible.
-  For this, upgrading to Qt4 would be helpful.
-  We are currently working on this.
-  Also, interfaces to the (data acquisition)
+  However, interfaces to the (data acquisition)
   devices need to be implemented for each platform as needed.
   Any help is appreciated!
 </p>
@@ -86,7 +84,8 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
 <ul>
   <li>Linux with kernel version 2.6</li>
   <li>GNU autotools</li>
-  <li><a href="http://doc.trolltech.com/3.3/">Qt version 3.3</a> (older versions have a bug in the thread support).</li>
+  <li><a href="http://doc.trolltech.com/3.3/">Qt version 3.3</a> or higher for <span class="relacs">relacs</span> version 0.9.6.
+      The <a href="#svn">current svn version</a> requires <a href="http://doc.trolltech.com/4.3/">Qt version 4</a></li>
   <li><a href="http://www.gnu.org/software/gsl/">Gnu Scientific Library</a> (recommended)</li>
   <li><a href="http://www.comdi.org">Comedi (linux control and measurement device interface)</a> (for accessing your data acquisition board, 
     read <a href="../plugins/comedi">installation instructions</a> first).</li>
@@ -129,11 +128,11 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
     A couple of new features need to be implemented or finished as
     soon as possible (most of this by spring-summer 2009):
     <ul>
-      <li>Dynamic clamp support (first version is working by now)</li>
-      <li>Upgrade to Qt4 (work in progress)</li>
-      <li>Data browser</li>
-      <li>Plugins for current and voltage clamp recordings (work in progress)</li>
-      <li>Update the plugins for the electric fish experiments (work in progress)</li>
+      <li>Dynamic clamp support (done)</li>
+      <li>Upgrade to Qt4 (done)</li>
+      <li>Data browser (work in progress)</li>
+      <li>Plugins for current clamp recordings (done)</li>
+      <li>Update the plugins for the electric fish experiments (done)</li>
     </ul>
   </dd>
 
@@ -161,6 +160,21 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
 
 <a name="license"></a>
 <h3>License</h3>
+
+<p>
+Please cite <span class="relacs">relacs</span> in the methods section
+of your manuscript, if you have acquired a substantial part of your
+date with <span class="relacs">relacs</span>. You might also want to
+provide the name of the RePros you used. Write something like
+</p>
+
+<blockquote>
+<p>
+Data acquistion and online stimulus generation was controlled by
+RELACS (www.relacs.net), mainly running the XYZ protocol that can be
+downloaded at www.XYZ.
+</p>
+</blockquote>
 
 <p>
 <span class="relacs">relacs</span> is distributed according to the

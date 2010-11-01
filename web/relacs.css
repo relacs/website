@@ -89,22 +89,11 @@ thead td {
   border-bottom: 1px solid #000000;
 }
 
-/*
-span.relacs {
-  font-family: "Penguin Attack", arial, helvetica, sans-serif;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 140%;
-  text-transform: lowercase;
-  line-height: 100%;
-}
-*/
-
 span.relacs {
   font-family: arial, helvetica, sans-serif;
   font-weight: bold;
   font-style: italic;
-  text-transform: capitalize; /*   uppercase lowercase */
+  text-transform: uppercase; /*  capitalize  uppercase lowercase */
 }
 
 .header { 

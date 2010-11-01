@@ -41,14 +41,6 @@
          offset="1"
          style="stop-color:#e15400;stop-opacity:1;" />
     </linearGradient>
-    <filter
-       inkscape:collect="always"
-       id="filter8590">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="1.1454463"
-         id="feGaussianBlur8592" />
-    </filter>
     <linearGradient
        id="linearGradient138">
       <stop
@@ -175,15 +167,6 @@
        y2="245.00195" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient5527"
-       id="linearGradient6871"
-       gradientUnits="userSpaceOnUse"
-       x1="94.789566"
-       y1="345.2258"
-       x2="94.789566"
-       y2="245.00195" />
-    <linearGradient
-       inkscape:collect="always"
        xlink:href="#linearGradient4478"
        id="linearGradient2294"
        gradientUnits="userSpaceOnUse"
@@ -219,6 +202,15 @@
        y1="192.74947"
        x2="689.86829"
        y2="217.38257" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5527"
+       id="linearGradient2307"
+       gradientUnits="userSpaceOnUse"
+       x1="94.789566"
+       y1="345.2258"
+       x2="94.789566"
+       y2="245.00195" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -230,16 +222,16 @@
      objecttolerance="10"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.0424559"
-     inkscape:cx="204.26744"
+     inkscape:zoom="1.0371837"
+     inkscape:cx="375.97734"
      inkscape:cy="395.62077"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:window-width="918"
-     inkscape:window-height="974"
-     inkscape:window-x="754"
+     inkscape:window-height="737"
+     inkscape:window-x="94"
      inkscape:window-y="0"
      showgrid="false" />
   <metadata
@@ -735,90 +727,85 @@
            sodipodi:role="line">Detector</tspan></text>
     </g>
     <g
-       id="g6859"
-       transform="translate(-21.729322,38.468395)">
-      <g
-         transform="matrix(1.2537313,0,0,1.2537313,62.471057,22.929613)"
-         id="g5589">
-        <path
-           transform="matrix(1.1514873,0,0,1.1514873,181.10758,-7.5901067)"
-           inkscape:tile-cy="296.72241"
-           inkscape:tile-cx="94.789566"
-           inkscape:tile-h="103.44093"
-           inkscape:tile-w="89.861431"
-           d="M 138.72028,322.07311 L 94.800574,347.44288 L 50.869858,322.09218 L 50.858851,271.37171 L 94.778558,246.00195 L 138.70927,271.35265 L 138.72028,322.07311 z "
-           inkscape:randomized="0"
-           inkscape:rounded="0"
-           inkscape:flatsided="true"
-           sodipodi:arg2="1.0469805"
-           sodipodi:arg1="0.52338175"
-           sodipodi:r2="43.925213"
-           sodipodi:r1="50.720467"
-           sodipodi:cy="296.72241"
-           sodipodi:cx="94.789566"
-           sodipodi:sides="6"
-           id="path5535"
-           style="opacity:1;fill:url(#linearGradient6871);fill-opacity:1;stroke:#ff500f;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.94117647"
-           sodipodi:type="star" />
-        <use
-           height="1052.3622"
-           width="744.09448"
-           x="0"
-           y="0"
-           inkscape:tiled-clone-of="#path5535"
-           xlink:href="#path5535"
-           id="use5579" />
-        <use
-           height="1052.3622"
-           width="744.09448"
-           x="0"
-           y="0"
-           inkscape:tiled-clone-of="#path5535"
-           xlink:href="#path5535"
-           transform="translate(-4.4930715,1.0344093)"
-           id="use5581" />
-        <use
-           height="1052.3622"
-           width="744.09448"
-           x="0"
-           y="0"
-           inkscape:tiled-clone-of="#path5535"
-           xlink:href="#path5535"
-           transform="translate(-8.9861431,2.0688186)"
-           id="use5583" />
-        <use
-           height="1052.3622"
-           width="744.09448"
-           x="0"
-           y="0"
-           inkscape:tiled-clone-of="#path5535"
-           xlink:href="#path5535"
-           transform="translate(-13.479215,3.1032279)"
-           id="use5585" />
-        <use
-           height="1052.3622"
-           width="744.09448"
-           x="0"
-           y="0"
-           inkscape:tiled-clone-of="#path5535"
-           xlink:href="#path5535"
-           transform="translate(-17.972286,4.1376372)"
-           id="use5587" />
-      </g>
+       id="g2309">
+      <path
+         sodipodi:type="star"
+         style="fill:url(#linearGradient2307);fill-opacity:1;stroke:#ff500f;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.94117647"
+         id="path5535"
+         sodipodi:sides="6"
+         sodipodi:cx="94.789566"
+         sodipodi:cy="296.72241"
+         sodipodi:r1="50.720467"
+         sodipodi:r2="43.925213"
+         sodipodi:arg1="0.52338175"
+         sodipodi:arg2="1.0469805"
+         inkscape:flatsided="true"
+         inkscape:rounded="0"
+         inkscape:randomized="0"
+         d="M 138.72028,322.07311 L 94.800574,347.44288 L 50.869858,322.09218 L 50.858851,271.37171 L 94.778558,246.00195 L 138.70927,271.35265 L 138.72028,322.07311 z "
+         inkscape:tile-w="89.861431"
+         inkscape:tile-h="103.44093"
+         inkscape:tile-cx="94.789566"
+         inkscape:tile-cy="296.72241"
+         transform="matrix(1.4436557,0,0,1.4436557,267.80198,51.882054)" />
+      <use
+         id="use5579"
+         xlink:href="#path5535"
+         inkscape:tiled-clone-of="#path5535"
+         y="0"
+         x="0"
+         width="744.09448"
+         height="1052.3622" />
+      <use
+         id="use5581"
+         transform="translate(-5.6331044,1.2968713)"
+         xlink:href="#path5535"
+         inkscape:tiled-clone-of="#path5535"
+         y="0"
+         x="0"
+         width="744.09448"
+         height="1052.3622" />
+      <use
+         id="use5583"
+         transform="translate(-11.266209,2.5937426)"
+         xlink:href="#path5535"
+         inkscape:tiled-clone-of="#path5535"
+         y="0"
+         x="0"
+         width="744.09448"
+         height="1052.3622" />
+      <use
+         id="use5585"
+         transform="translate(-16.899314,3.8906139)"
+         xlink:href="#path5535"
+         inkscape:tiled-clone-of="#path5535"
+         y="0"
+         x="0"
+         width="744.09448"
+         height="1052.3622" />
+      <use
+         id="use5587"
+         transform="translate(-22.532417,5.1874853)"
+         xlink:href="#path5535"
+         inkscape:tiled-clone-of="#path5535"
+         y="0"
+         x="0"
+         width="744.09448"
+         height="1052.3622" />
       <text
          sodipodi:linespacing="125%"
          id="text5776"
-         y="441.16891"
-         x="403.04065"
+         y="479.6373"
+         x="381.31134"
          style="font-size:18px;font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;font-family:DejaVu Sans"
          xml:space="preserve"><tspan
-           y="441.16891"
-           x="403.04065"
+           y="479.6373"
+           x="381.31134"
            id="tspan5778"
-           sodipodi:role="line">Experimental</tspan><tspan
+           sodipodi:role="line">Research</tspan><tspan
            id="tspan5780"
-           y="463.66891"
-           x="403.04065"
+           y="502.1373"
+           x="381.31134"
            sodipodi:role="line">Protocols</tspan></text>
     </g>
     <g
