@@ -84,10 +84,11 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
 <ul>
   <li>Linux with kernel version 2.6</li>
   <li>GNU autotools</li>
-  <li><a href="http://doc.trolltech.com/3.3/">Qt version 3.3</a> or higher for <span class="relacs">relacs</span> version 0.9.6.
-      The <a href="#svn">current svn version</a> requires <a href="http://doc.trolltech.com/4.3/">Qt version 4</a></li>
+  <li><a href="http://doc.trolltech.com/4.3/">Qt version 4</a> for the GUI</li>
   <li><a href="http://www.gnu.org/software/gsl/">Gnu Scientific Library</a> (recommended)</li>
-  <li><a href="http://www.comdi.org">Comedi (linux control and measurement device interface)</a> (for accessing your data acquisition board, 
+  <li><a href="http://www.comdi.org">Comedi (linux control and measurement device interface)</a> (optional, for accessing your data acquisition board, 
+  <li><a href="http://www.rtai.org">RTAI (real time linux kernel)</a> (optional,
+    for using the dynamic-clamp plugins, 
     read <a href="../plugins/comedi">installation instructions</a> first).</li>
   <li><a href="http://www.stack.nl/~dimitri/doxygen/">doxygen</a> for generating the documentation (recommended)</li>
 </ul>
@@ -119,14 +120,14 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
     Since 2007 we are actively making the program ready to be shared
     with other people, i.e. setting up GNU autotools and finalizing 
     the interfaces.
-    Since most of this is accomplished by now
+    Most of this is accomplished by now and
     you are welcome to join the project and contribute to it.
   </dd>
 
   <dt>Phase 4 - New urgent features (version 0.9.7)</dt>
   <dd>
     A couple of new features need to be implemented or finished as
-    soon as possible (most of this by spring-summer 2009):
+    soon as possible:
     <ul>
       <li>Dynamic clamp support (done)</li>
       <li>Upgrade to Qt4 (done)</li>
@@ -151,7 +152,7 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
         <ul>
           <li>Macro editor</li>
           <li>Filter and detector setup tool</li>
-          <li>Data acquisition device and channel selection</li>
+          <li>Data acquisition device and channel selection (work in progress)</li>
         </ul>
       </li>
     </ol>
@@ -170,11 +171,12 @@ provide the name of the RePros you used. Write something like
 
 <blockquote>
 <p>
-Data acquistion and online stimulus generation was controlled by
-RELACS (www.relacs.net), mainly running the XYZ protocol that can be
-downloaded at www.XYZ.
+Data acquistion and closed-loop stimulus generation was controlled by
+RELACS (www.relacs.net), mainly running the protocols X and Y that can be
+downloaded at www.ZZZ.
 </p>
 </blockquote>
+<p></p>
 
 <p>
 <span class="relacs">relacs</span> is distributed according to the
@@ -188,7 +190,7 @@ downloaded at www.XYZ.
 </p> 
 
 <p>
-  Copyright (C) 2002-2008 Jan Benda &lt;benda@bio.lmu.de&gt;
+  Copyright (C) 2002-2010 Jan Benda &lt;benda@bio.lmu.de&gt;
 </p> 
 
 <p>
