@@ -459,20 +459,22 @@ for PLUGINTYPE in $PLUGINTYPES $DEVICEPLUGINTYPES; do
 	echo
 	echo "<p>$DESCR</p>"
 	echo
-	echo "<ul>"
-	while read DIR NAME DESCR; do
-	    PLUGINSET=""
-	    for SET in $PLUGINSETS; do
-		PDIR=${SET%%:*}
-		PDESCR=${SET##*:}
-		if test "x$PDESCR" = "x$DESCR"; then
-		    PLUGINSET="${PDIR##*/}"
-		    break;
-		fi
-	    done
-	    echo "  <li><a href=\"${DIR}\">$NAME</a> [<a href=\"$PLUGINSET\">$DESCR</a>]: <span class=\"brief\">$(sed -n '/<h2>.*<span/,/<p>/p' $WEBDEST/plugins/$DIR | sed '1d; $d;')</span></li>"
-	done < <(sort -k 2 ${PLUGINLABEL}plugins.dat)
-	echo "</ul>"
+	if test -f ${PLUGINLABEL}plugins.dat; then
+	    echo "<ul>"
+	    while read DIR NAME DESCR; do
+		PLUGINSET=""
+		for SET in $PLUGINSETS; do
+		    PDIR=${SET%%:*}
+		    PDESCR=${SET##*:}
+		    if test "x$PDESCR" = "x$DESCR"; then
+			PLUGINSET="${PDIR##*/}"
+			break;
+		    fi
+		done
+		echo "  <li><a href=\"${DIR}\">$NAME</a> [<a href=\"$PLUGINSET\">$DESCR</a>]: <span class=\"brief\">$(sed -n '/<h2>.*<span/,/<p>/p' $WEBDEST/plugins/$DIR | sed '1d; $d;')</span></li>"
+	    done < <(sort -k 2 ${PLUGINLABEL}plugins.dat)
+	    echo "</ul>"
+	fi
     } > $WEBBASE/plugins/$PLUGINFILE
     sed 's|\.\./||' navigation.tmp > $WEBBASE/plugins/menu.dat 
     createhtml "plugins/$PLUGINFILE" "RELACS - $PTYPE Plugins" "plugins" "index.html" "$PLUGINFILE"
@@ -511,7 +513,10 @@ while read INDEXLINE; do
 	    PTYPE=${PLUGINTYPE%%:*}
 	    PLUGINLABEL=$(echo $PTYPE | tr [:upper:] [:lower:])
 	    DESCR=${PLUGINTYPE##*:}
-            NUM=$(cat ${PLUGINLABEL}plugins.dat | wc -l)
+	    NUM=0
+	    if test -f ${PLUGINLABEL}plugins.dat; then
+		NUM=$(cat ${PLUGINLABEL}plugins.dat | wc -l)
+	    fi
 	    echo "  <li><a href=\"$(echo $PTYPE | tr [:upper:] [:lower:])s.html\">$PTYPE ($NUM):</a> <span class=\"brief\">$DESCR</span></li>"
 	done
 	IFS="$SAVEIFS"

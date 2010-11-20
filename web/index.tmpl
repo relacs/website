@@ -82,6 +82,18 @@ In addition, <span class="relacs">relacs</span> provides:
     <a href="http://www.gnu.org/licenses/gpl.html">GPL</a>.
     <a href="features/index.html#free">More ...</a>
   </dd>
+  <dd>
+    <span class="relacs">relacs</span> uses
+    <a href="http://doc.qt.nokia.com/4.4/index.html">Qt4</a> for the GUI and mutlithreading support,
+    <a href="www.doxygen.org">Doxygen</a> for inline documentation of the API, and
+    optionally <a href="http://www.gnu.org/software/gsl/">GSL-GNU scientific library</a> for some numerics.
+    Currently, only <a href="http://www.comedi.org">COMEDI</a> based implementations of the
+    <a href="plugins/analoginputs.html">AnalogInput</a> and 
+    <a href="plugins/analogoutputs.html">AnalogOutput</a> plugins are provided
+    (see <a href="plugins/comedi">comedi plugins</a>).
+    The <a href="features/index.html#dynclamp">dynamic-clamp feature</a> is based on <a href="http://www.rtai.org">RTAI</a>.<br>
+    <strong>Note:</strong> For normal (no dynamic-clamp) streaming analog input and output, RTAI is NOT required!
+  </dd>
 
   <dt>Sweep-based quasi-continuous acquisition</dt>
   <dd>
@@ -89,6 +101,10 @@ In addition, <span class="relacs">relacs</span> provides:
     are started simultaneously for each stimulus to ensure
     best synchronization, but data are recorded all the time
     and can be viewed continuously.
+    Depending on the hardware and the driver implementation
+    <span class="relacs">relacs</span> is also able to start analog output
+    without interrupting the analog input stream 
+    (e.g. the <a href="plugins/comedi">dynamic clamp plugins</a>).
   </dd>
   <dd>
     <span class="relacs">relacs</span> has been designed initially
