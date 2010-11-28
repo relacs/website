@@ -411,22 +411,41 @@ for SET in $PLUGINSETS $DEVICEPLUGINSETS; do
 	fi
 	# plugin list:
 	if [ -d $RELACSBASE/plugins/$DIR/help ]; then
-	    echo "<ul>"
 	    for PLUGIN in $RELACSBASE/plugins/$DIR/help/*.html; do
-		PLUGINFILE=${PLUGIN##*/}
-		PLUGINNAME=${PLUGINFILE%%.*}
-		PLUGINNAME=${PLUGINNAME##*-}
                 PLUGINTYPE="$(sed -n -e "/<h2>/{s|<h2>\(.*\) \+\[\(.*\)\]</h2>|\2|; p;}" $PLUGIN )"
-		PLUGINTYPEFILEBASE="$(echo $PLUGINTYPE | tr [:upper:] [:lower:])"
-		sed -e  "1d; \$d; s|<h2>\(.*\) \+\[.*\]</h2>|<h2>\1<span class=\"pluginset\">\&nbsp;\&nbsp;[<a href=\"../${PLUGINTYPEFILEBASE}s.html\">$PLUGINTYPE</a>]\&nbsp;\&nbsp;[<a href=\"index.html\">$DESCR Plugins</a>]</span></h2>|" $PLUGIN > $WEBBASE/plugins/${DIR##*/}/$PLUGINFILE
-		cp navigation.tmp $WEBBASE/plugins/menu.dat 
-		createhtml plugins/${DIR##*/}/$PLUGINFILE "RELACS - $DESCR Plugins: $PLUGINNAME" "plugins" "../index.html"
-  	        rm  $WEBBASE/plugins/${DIR##*/}/$PLUGINFILE
-#echo "DEBUG: $PLUGIN ${PLUGINTYPEFILEBASE}" > /dev/stderr
-		echo "${DIR##*/}/$PLUGINFILE $PLUGINNAME $DESCR" >> ${PLUGINTYPEFILEBASE}plugins.dat
-		echo "  <li><a href=\"$PLUGINFILE\">$PLUGINNAME</a>&nbsp;[<a href=\"../${PLUGINTYPEFILEBASE}s.html\">$PLUGINTYPE</a>]: <span class=\"brief\">$(sed -n '/<h2>/,/<p>/p' $PLUGIN | sed '1d; $d;')</span></li>"
+		echo "$PLUGINTYPE|$PLUGIN"
+	    done > plugins.tmp
+	    echo "<table class=\"plugins\">"
+	    ALLTYPES="$PLUGINTYPES|$DEVICEPLUGINTYPES"
+	    IFS="|"
+	    for TYPE in $ALLTYPES; do
+		PTYPE=${TYPE%%:*}
+		while read PLUGINTYPE PLUGIN; do
+		    PLUGINFILE=${PLUGIN##*/}
+		    PLUGINNAME=${PLUGINFILE%%.*}
+		    PLUGINNAME=${PLUGINNAME##*-}
+		    PLUGINTYPEFILEBASE="$(echo $PLUGINTYPE | tr [:upper:] [:lower:])"
+		    sed -e  "1d; \$d; s|<h2>\(.*\) \+\[.*\]</h2>|<h2>\1<span class=\"pluginset\">\&nbsp;\&nbsp;[<a href=\"../${PLUGINTYPEFILEBASE}s.html\">$PLUGINTYPE</a>]\&nbsp;\&nbsp;[<a href=\"index.html\">$DESCR Plugins</a>]</span></h2>|" $PLUGIN > $WEBBASE/plugins/${DIR##*/}/$PLUGINFILE
+		    cp navigation.tmp $WEBBASE/plugins/menu.dat 
+		    createhtml plugins/${DIR##*/}/$PLUGINFILE "RELACS - $DESCR Plugins: $PLUGINNAME" "plugins" "../index.html"
+		    rm  $WEBBASE/plugins/${DIR##*/}/$PLUGINFILE
+		    echo "$DESCR $PLUGINNAME ${DIR##*/}/$PLUGINFILE" >> ${PLUGINTYPEFILEBASE}plugins.dat
+		    echo "  <tr>"
+		    echo "    <td><a href=\"$PLUGINFILE\">$PLUGINNAME</a>&nbsp;[<a href=\"../${PLUGINTYPEFILEBASE}s.html\">$PLUGINTYPE</a>]: <span class=\"brief\">$(sed -n '/<h2>/,/<p>/p' $PLUGIN | sed '1d; $d;')</span><td>"
+		    PLUGINIMAGE="$(echo ${PLUGINFILE%%.*} | tr [:upper:] [:lower:]).png"
+		    if test -f "$WEBDEST/plugins/${DIR##*/}/$PLUGINIMAGE"; then
+			PLUGINIMAGESMALL="${PLUGINIMAGE%.png}-small.png"
+			convert -resize 150 "$WEBDEST/plugins/${DIR##*/}/$PLUGINIMAGE" "$WEBDEST/plugins/${DIR##*/}/$PLUGINIMAGESMALL"
+			echo "    <td><img src=\"$PLUGINIMAGESMALL\" alt=\"$PLUGINIMAGE\"></td>"
+		    else
+			echo "    <td></td>"
+		    fi
+		    echo "  </tr>"
+		done < <(grep -i "^$PTYPE|" plugins.tmp)
 	    done
-	    echo "</ul>"
+	    IFS="$SAVEIFS"
+	    echo "</table>"
+	    rm plugins.tmp
 	else
 	    echo "<p>Sorry - no plugin descriptions available!</p>"
 	fi
@@ -460,20 +479,31 @@ for PLUGINTYPE in $PLUGINTYPES $DEVICEPLUGINTYPES; do
 	echo "<p>$DESCR</p>"
 	echo
 	if test -f ${PLUGINLABEL}plugins.dat; then
-	    echo "<ul>"
-	    while read DIR NAME DESCR; do
-		PLUGINSET=""
-		for SET in $PLUGINSETS; do
-		    PDIR=${SET%%:*}
-		    PDESCR=${SET##*:}
-		    if test "x$PDESCR" = "x$DESCR"; then
-			PLUGINSET="${PDIR##*/}"
-			break;
+	    echo "<table class=\"plugins\">"
+	    for SET in $PLUGINSETS $DEVICEPLUGINSETS; do
+		DESCR=${SET##*:}
+		while read DESCR NAME DIR; do
+		    PLUGINSET=""
+		    for SET in $PLUGINSETS; do
+			PDIR=${SET%%:*}
+			PDESCR=${SET##*:}
+			if test "x$PDESCR" = "x$DESCR"; then
+			    PLUGINSET="${PDIR##*/}"
+			    break;
+			fi
+		    done
+		    echo "  <tr>"
+		    echo "    <td><a href=\"${DIR}\">$NAME</a> [<a href=\"$PLUGINSET\">$DESCR</a>]: <span class=\"brief\">$(sed -n '/<h2>.*<span/,/<p>/p' $WEBDEST/plugins/$DIR | sed '1d; $d;')</span></td>"
+		    PLUGINIMAGE="$(echo ${DIR%.html} | tr [:upper:] [:lower:])-small.png"
+		    if test -f "$WEBDEST/plugins/$PLUGINIMAGE"; then
+			echo "    <td><img src=\"$PLUGINIMAGE\" alt=\"${PLUGINIMAGE##*/}\"></td>"
+		    else
+			echo "    <td></td>"
 		    fi
-		done
-		echo "  <li><a href=\"${DIR}\">$NAME</a> [<a href=\"$PLUGINSET\">$DESCR</a>]: <span class=\"brief\">$(sed -n '/<h2>.*<span/,/<p>/p' $WEBDEST/plugins/$DIR | sed '1d; $d;')</span></li>"
-	    done < <(sort -k 2 ${PLUGINLABEL}plugins.dat)
-	    echo "</ul>"
+		    echo "  </tr>"
+		done < <(fgrep "$DESCR " ${PLUGINLABEL}plugins.dat | sort)
+	    done
+	    echo "</table>"
 	fi
     } > $WEBBASE/plugins/$PLUGINFILE
     sed 's|\.\./||' navigation.tmp > $WEBBASE/plugins/menu.dat 
