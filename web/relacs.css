@@ -411,6 +411,85 @@ table.layout {
   padding-right: 10px;
 }
 
+.content table.plugins th { 
+  font-size: 120%;
+  color: #000000;
+  text-shadow: #888888 0.2em 0.2em 4px;
+  background-color: #EEEEFF;
+  font-weight: bold;
+  padding-top: 0.8ex;
+  padding-bottom: 0.6ex;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0;
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+  border-width: 0px;
+  border-top-width: 1px;
+  border-style: solid;
+  border-color: #AAAAFF;
+}
+
+.content table.navigationtop { 
+  background-color: #FFFFFF;
+  padding-top: 0.8ex;
+  padding-bottom: 0.6ex;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0;
+  margin-bottom: 1ex;
+  border: none;
+  width: 100%;
+}
+
+.content table.navigationtop td.previous { 
+  padding-top: 0ex;
+  padding-bottom: 0ex;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+
+.content table.navigationtop td.next { 
+  padding-top: 0ex;
+  padding-bottom: 0ex;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.content table.navigationbottom { 
+  background-color: #FFFFFF;
+  padding-top: 0.8ex;
+  padding-bottom: 0.6ex;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0;
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+  border-width: 0px;
+  border-top-width: 1px;
+  border-style: solid;
+  border-color: #AAAAFF;
+  width: 100%;
+}
+
+.content table.navigationbottom td.previous { 
+  padding-top: 0.5ex;
+  padding-bottom: 0ex;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left;
+}
+
+.content table.navigationbottom td.next { 
+  padding-top: 0.5ex;
+  padding-bottom: 0ex;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: right;
+}
+
 .trailer { 
   clear: both;
   text-align: right;
