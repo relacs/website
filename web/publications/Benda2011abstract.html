@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>Benda, Grewe 2011: Abstract</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+    <link rel="stylesheet" type="text/css" href="relacspublications.css">
+  </head>
+
+  <body>
+    <h1>Closed-loop electrophysiological experiments and automated metadata acquisition with RELACS</h1>
+    <h3>Jan Benda &amp; Jan Grewe</h3>
+    <h3>33th G&ouml;ttingen Neurobiology Conference, 2009</h3>
+    <h3><a href="Benda2011.pdf">[PDF]</a>&nbsp;</h3>
+
+    <h2>Abstract</h2>
+    <p>
+      Relacs ("Relaxed ELectrophysiological data Acquisition, Control,
+      and Stimulation", <a href="http://www.relacs.net">www. relacs.net</a>)
+      is a fully customizable software platform for data acquisition,
+      online analysis, and stimulus generation specifically designed
+      for electrophysiological recordings. Filters and spike detectors
+      can be applied instantly on the recorded potentials. Freely
+      programmable, hardware independent C++ plugins can access the
+      preprocessed data for further online analysis and
+      visualization. Therefore the experimental protocols can
+      automatically adapt a stimulus (e.g. offset, variance, etc.) in
+      a closed loop fashion and thus completely control the running
+      experiment.
+    </p>
+
+    <p>
+      For offline data-analysis, data management, and data sharing the
+      annotation of the raw data with metadata that specify the
+      stimuli, the recorded neuron, the animal, as well as context of
+      the experiment is necessary. Traditionally, such data have been
+      written into lab books. File formats for metadata are often
+      tailored to a specific database schema and thus assume a very
+      detailed and specific structure and context. Within a lab this
+      specificity is usually not a problem as long as the same
+      database schema is used. However, these file formats for
+      metadata are very difficult to handle, when it comes to sharing
+      data within a larger community, in particular via the upcoming
+      initiatives of public databases. In addition, in most cases,
+      such metadata files do not even exist.
+    </p>
+
+    <p>
+      We here want to stress that the recording software used for
+      acquiring the raw data knows already many of the metadata. In
+      particular, these are properties of the generated stimuli and
+      settings of the controlled hardware. Therefore metadata in
+      principle can and should be immediately acquired during the
+      acquisition of the raw data in order to minimize manual efforts
+      in providing this important data. As a closed-loop software
+      RELACS has all this information available and saves it to disk.
+    </p>
+
+    <p>
+      We also developed a file format for hierarchically organized
+      key-value pairs that is independent of any specific
+      database-schema and thus can be used as a general file format
+      for exchanging metadata.  Through customized terminologies the
+      metadata can be structured and standardized for ensuring
+      interoperability while at the same time not restricting the
+      content, thus ensuring immediate flexibility.  This way,
+      metadata can be submitted to a local as well as public
+      data-bases, like for example to the German neuroinformatics node
+      at <a href="http://www.g-node.org">www.g-node.org</a>, without
+      any manual interference (see talk by Jan Grewe at symposium 10).
+    </p>
+
+    <p>
+      In our live demonstration we exemplify this approach by
+      acquiring simulated data with RELACS and diretly importing the
+      metadata to LabLog - the laboratory logbook, a datamanagement
+      program for any neuroscientific lab
+      (<a href="http://lablog.sourceforge.net/">http://lablog.sourceforge.net/</a>,
+      see poster by Adrian Stoewer and Jan Grewe).
+    </p>
+
+   <hr>
+<!-- Created: Wed Aug 22 09:58:47 CEST 2007 -->
+<!-- hhmts start -->
+Last modified: Tue Mar 31 21:41:30 CEST 2009
+<!-- hhmts end -->
+  </body>
+</html>
