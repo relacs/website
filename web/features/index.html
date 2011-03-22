@@ -136,25 +136,39 @@
 
 
 <a name="metadata"></a>
-<h3>Meta-data</h3>
+<h3>Metadata</h3>
 <p>
-  Very important for enhancing the reusability of acquired data
-  is their annotation with all sorts of meta-data that
-  specify the context and the details of the experiment.
-  Upon completion of a recording, <span class="relacs">relacs</span> immediately forces the
-  experimenter to provide this important information
-  through a freely configurable dialog.
-  In addition, for each recording all configuration files, log files, and
-  settings of the research protocols are saved as well.
+  For offline data-analysis, data management, and data sharing the
+  annotation of the raw data with metadata that specify the stimuli,
+  the recorded neuron, the animal, as well as context of the
+  experiment is necessary. Traditionally, such data have been written
+  into lab books.  <span class="relacs">relacs</span> knows already
+  many of the relevant metadata.  In particular, these are properties
+  of the generated stimuli and settings of the controlled hardware.
+  Upon completion of a recording, <span class="relacs">relacs</span>
+  immediately forces the experimenter to provide additional important
+  information through a freely configurable dialog.  In addition, for
+  each recording all configuration files, log files, and settings of
+  the research protocols are saved as well.  Thus, <span
+  class="relacs">relacs</span> minimizes manual efforts as much as
+  possible in providing metadata. This is especially important when it
+  comes to data sharing over pblic databases like <a
+  href="http://www.g-node.de/">G-Node</a> or <a
+  href="http://www.carmen.org.uk/">CARMEN</a>.
 </p>
 <p>
-  We are currently working on developing a standard for sharing meta
-  data of electrophysiological experiments (supported by <a
-  href="http://www.g-node.de/">G-Node</a>).  Specifically, in
-  collaboration with the <a
-  href="http://lablog.sourceforge.net">LabLog</a> project we work on a
-  solution for directly storing the meta-data acquired by <span
-  class="relacs">relacs</span> into a data-base .
+  We developed <a href="http://www.g-node.de/odml/">odML</a>, a file
+  format for hierarchically organized key-value pairs that is
+  independent of any specific database-schema and thus can be used as
+  a general file format for exchanging metadata.  Through customized
+  terminologies the metadata can be structured and standardized for
+  ensuring interoperability while at the same time not restricting the
+  content, thus ensuring immediate flexibility.  This way, metadata
+  can be directly submitted to a local as well as public data-bases,
+  like for example the <a
+  href="http://lablog.sourceforge.net">LabLog</a> or the <a
+  href="http://www.g-node.org">German Neuroinformatics Node</a>,
+  without any manual interference.
 </p>
 
 
