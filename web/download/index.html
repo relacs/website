@@ -42,13 +42,23 @@
   In most cases, the current svn version should work, but once in a while it is broken.
   Be warned! You might then give it another try a couple of days later.
 </p>
+<!--
 <p>
   Use the following command to retrieve the current source tree:
 </p>
 <pre>
 svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pre>
 <p>
-  (this command will download the source files into the directory <tt>./relacs></tt>).
+  (this command will download the source files into the directory <tt>./relacs</tt>).
+</p>
+ -->
+<p>
+  Use the following command to retrieve the source tree from the lates stable version:
+</p>
+<pre>
+svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/tags/relacs-0.9.7 relacs</pre>
+<p>
+  (this command will download the source files into the directory <tt>./relacs</tt>).
 </p>
 <p>
   Then change to the <tt>relacs</tt> directory and
@@ -130,16 +140,31 @@ svn co https://relacs.svn.sourceforge.net/svnroot/relacs/relacs/trunk relacs</pr
     you are welcome to join the project and contribute to it.
   </dd>
 
-  <dt>Phase 4 - New urgent features (version 0.9.7)</dt>
+  <dt>Phase 4A - New urgent features I (version 0.9.7, the current stable version)</dt>
   <dd>
     A couple of new features need to be implemented or finished as
     soon as possible:
     <ul>
-      <li>Dynamic clamp support (done)</li>
-      <li>Upgrade to Qt4 (done)</li>
-      <li>Data browser (work in progress)</li>
-      <li>Plugins for current clamp recordings (done)</li>
-      <li>Update the plugins for the electric fish experiments (done)</li>
+      <li>Dynamic clamp support</li>
+      <li>Upgrade to Qt4</li>
+      <li>Plugins for current clamp recordings</li>
+      <li>Update the plugins for the electric fish experiments</li>
+    </ul>
+  </dd>
+
+  <dt>Phase 4B - New urgent features II (version 0.9.8, the current development version)</dt>
+  <dd>
+    In this version we reimplement all name-value pair representations
+    (configuration files, dialogs, table keys, stimulus descriptions, etc., i.e. class Options)
+    to be
+    <ul>
+      <li>hierarchical name-value pairs that
+      follow <a href="http://www.g-node.de/odml/">odML</a>
+      standard.</li>
+    </ul>
+    Once this is done, we finish the long awaited
+    <ul>
+      <li>data browser</li>
     </ul>
   </dd>
 
