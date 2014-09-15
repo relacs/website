@@ -373,6 +373,7 @@ table.layout {
   border-style: solid;
   border-color: #AAAAFF;
   border-width: 1px;
+  white-space: pre-wrap;
 }
 
 .content blockquote {

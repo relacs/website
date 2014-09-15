@@ -33,7 +33,7 @@
 <a name="svn"></a>
 <h3>Subversion</h3>
 <p>
-  You can retrieve a snapshot of the current development versions
+  You can retrieve a snapshot of the current development version
   from the
   <a href="http://sourceforge.net/p/relacs/code/HEAD/tree">Subversion repository</a> on
   <a href="http://sourceforge.net/projects/relacs">
@@ -41,24 +41,25 @@
   </a>.
 </p>
 <p>
-  Use the following command to retrieve the source tree from the latest stable version:
-  <pre>
-    svn co svn://svn.code.sf.net/p/relacs/code/relacs/tags/relacs-0.9.7 relacs</pre>
+  Make sure you have \c subversion installed on your computer:
 </p>
+<pre>
+  sudo apt-get install subversion</pre>
 <p>
-  Alternatively you can retrieve the source tree of the current development version:
-  <pre>
-    svn co svn://svn.code.sf.net/p/relacs/code/relacs/trunk relacs</pre>
-  In most cases, the current version should work, but once in a while it is broken.
+  Use the following command to retrieve the source tree of the current development version:
+</p>
+<pre>
+  svn co svn://svn.code.sf.net/p/relacs/code/relacs/trunk relacs</pre>
+<p>
+  This downloads the source files into the directory <tt>./relacs</tt>.
+  In most cases, the current version should work and is the preferred version to work with.
+  However, once in a while it is broken.
   Be warned! You might then give it another try a couple of days later.
 </p>
 <p>
-  Both commands download the source files into the directory <tt>./relacs</tt>.
-</p>
-<p>
-  After retrieving one of the source trees change to the <tt>relacs</tt> directory and
-  read the <a href="../doc/readme.html">README</a> and the 
-  <a href="../doc/install.html">INSTALL</a> files for more instructions.
+  Continue with the instructions given in the 
+  <a href="../doc/install.html">INSTALL</a> file. You may also want to
+  read the <a href="../doc/readme.html">README</a> file.
 </p>
 <p>
   You can also

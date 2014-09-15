@@ -419,7 +419,7 @@ for SET in $PLUGINSETS $DEVICEPLUGINSETS; do
 	    echo "    <td class=\"next\">next: <a href=\"../${NEXTDIR##*/}\">${NEXTSET##*:}</a></td>"
 	fi
 	echo "  </tr>"
-	echo "<table>"
+	echo "</table>"
 	echo ""
 	# title:
 	echo "<h2>$DESCR Plugins</h2>"
@@ -456,14 +456,14 @@ for SET in $PLUGINSETS $DEVICEPLUGINSETS; do
 		    # plugin type section:
 		    if test "x$PTYPE" != "x$PREVPTYPE"; then
 			echo "  <tr>"
-			echo "    <th colspan=\"3\"><a href=\"../${PLUGINTYPEFILEBASE}s.html\">$PLUGINTYPE</a> Plugins</th>"
+			echo "    <th colspan=\"3\"><a href=\"../${PLUGINTYPEFILEBASE}s.html\">$PLUGINTYPE</a> Plugins:</th>"
 			echo "  </tr>"
 		    fi
 		    echo "  <tr>"
 		    # plugin name:
 		    echo "    <td><a href=\"$PLUGINFILE\">$PLUGINNAME</a>:</td>"
 		    # brief description:
-		    echo "    <td><span class=\"brief\">$(sed -n '/<h2>/,/<\/p>/p' $PLUGIN  |sed '1d')</span></td>"
+		    echo "    <td><span class=\"brief\">$(sed -n '/<h2>/,/<\/p>/p' $PLUGIN  |sed '1d; 2s/^<div.*">//')</span></td>"
 		    # plugin image:
 		    PLUGINIMAGE="$(echo ${PLUGINFILE%%.*} | tr [:upper:] [:lower:]).png"
 		    if test -f "$WEBDEST/plugins/${DIR##*/}/$PLUGINIMAGE"; then
@@ -494,7 +494,7 @@ for SET in $PLUGINSETS $DEVICEPLUGINSETS; do
 	    echo "    <td class=\"next\">next: <a href=\"../${NEXTDIR##*/}\">${NEXTSET##*:}</a></td>"
 	fi
 	echo "  </tr>"
-	echo "<table>"
+	echo "</table>"
 	echo ""
 	# detailed description:
 	sed -n '/<div class=\"contents\">/,/<\/div><!-- contents -->/p;' $RELACSBASE/plugins/$DIR/doc/html/index.html | sed 's/<h/\n<h/; s/<\(\/\?\)h4/<\1h5/; s/<\(\/\?\)h3/<\1h4/; s/<\(\/\?\)h2/<\1h3/; s/<\(\/\?\)h1/<\1h2/;' > tmp.txt
@@ -544,7 +544,7 @@ for PLUGINTYPE in $ALLTYPES; do
 	    echo "    <td class=\"next\">next: <a href=\"$NEXTFILE\">${NEXTTYPE%%:*}</a></td>"
 	fi
 	echo "  </tr>"
-	echo "<table>"
+	echo "</table>"
 	echo ""
 	# title:
 	echo "<h2>$PTYPE Plugins</h2>"
@@ -562,14 +562,14 @@ for PLUGINTYPE in $ALLTYPES; do
 		    PLUGINSET="${SDIR##*/}"
 		    if test "x$DESCR" != "x$PREVSETDESCR"; then
 			echo "  <tr>"
-			echo "    <th colspan=\"3\"><a href=\"$PLUGINSET\">$DESCR</a> Plugin Set</th>"
+			echo "    <th colspan=\"3\"><a href=\"$PLUGINSET\">$DESCR</a> Plugin Set:</th>"
 			echo "  </tr>"
 		    fi
 		    echo "  <tr>"
 		    # plugin name:
 		    echo "    <td><a href=\"${DIR}\">$NAME</a>:</td>"
 		    # brief description:
-		    echo "    <td><span class=\"brief\">$(sed -n '/<td class=\"content\">/,${/<h2>/,/<\/p>/p}' $WEBDEST/plugins/$DIR | sed '1d')</span></td>"
+		    echo "    <td><span class=\"brief\">$(sed -n '/<td class=\"content\">/,${/<h2>/,/<\/p>/p}' $WEBDEST/plugins/$DIR | sed '1d; 2s/^<div.*">//')</span></td>"
 		    # plugin image:
 		    PLUGINIMAGE="$(echo ${DIR%.html} | tr [:upper:] [:lower:])-small.png"
 		    if test -f "$WEBDEST/plugins/$PLUGINIMAGE"; then
@@ -594,7 +594,7 @@ for PLUGINTYPE in $ALLTYPES; do
 	    echo "    <td class=\"next\">next: <a href=\"$NEXTFILE\">${NEXTTYPE%%:*}</a></td>"
 	fi
 	echo "  </tr>"
-	echo "<table>"
+	echo "</table>"
 	echo ""
     } > $WEBBASE/plugins/$PLUGINFILE
     sed 's|\.\./||' navigation.tmp > $WEBBASE/plugins/menu.dat 
