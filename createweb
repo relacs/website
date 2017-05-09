@@ -34,6 +34,7 @@ patchclampprojects:Patch-Clamp-Projects"
 
 # directories and descriptions of device plugin sets:
 DEVICEPLUGINSETS="linuxdevices/comedi:Comedi \
+linuxdevices/rtaicomedi:RTAI-Comedi \
 linuxdevices/daqflex:DAQFlex \
 linuxdevices/attcs3310:Att-CS3310 \
 linuxdevices/misc:Miscellaneous"
