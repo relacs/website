@@ -4,7 +4,7 @@
 # in WEBBASE.
 # (c) 2008-2013 by Jan Benda
 
-RELACSBASE=../relacsgit
+RELACSBASE=../relacs
 WEBBASE=web
 WEBDEST=relacsweb
 
@@ -258,7 +258,7 @@ rm $WEBBASE/index.html
 
 # README, INSTALL:
 echo "format README and INSTALL files ... "
-for FILE in $RELACSBASE/README $RELACSBASE/INSTALL; do
+for FILE in $RELACSBASE/README.md $RELACSBASE/INSTALL; do
     FILENAME=${FILE##*/}
     WEB=$(echo $FILENAME | tr [:upper:] [:lower:])
     {
