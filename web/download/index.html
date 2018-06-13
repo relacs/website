@@ -2,57 +2,38 @@
 <h2>Download</h2>
 
 <p>
-  <span class="relacs">relacs</span> is available on
+  <span class="relacs">relacs</span> sources are available on
+  <a href="https://github.com/relacs/relacs">
+    <img src="github.png" height="15" border="0" align="top" /></a>, 
+  releases and this website are provided by
   <a href="http://sourceforge.net/projects/relacs">
-    <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=199846&type=10" width="80" height="15" border="0" align="top" alt="Get Relacs at SourceForge.net. Fast, secure and Free Open Source software downloads" />
-  </a>, from where you can download a source-code tarball.
-</p>
-<p>
-  For getting the current development version you can
-  download a snapshot from the subversion repository
-  (<a href="#svn">see below for instructions</a>).
+    <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=199846&type=10" width="80" height="15" border="0" align="top" alt="Get Relacs at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>.
 </p>
 
 
-<a name="installation"></a>
-<h3>Installation</h3>
+<a name="github"></a>
+<h3>Installation from git repository</h3>
 <p>
-  After downloading the source-code tarball, 
-  unpack the relacs-xxx.tgz file and change into the
-  relacs directory:
+  We recommend to clone the <span class="relacs">relacs</span> sources
+  from the <a href="https://github.com/relacs/relacs">
+    <img src="github.png" height="15" border="0" align="top" /></a> 
+  development repository.
+</p>
+<p>
+  Make sure you have <tt>git</tt> installed on your computer:
 </p>
 <pre>
-> tar xzvf relacs-xxx.tgz
-> cd relacs-xxx</pre>
+  sudo apt-get install git</pre>
 <p>
-  Then read the <a href="../doc/readme.html">README</a> and the 
-  <a href="../doc/install.html">INSTALL</a> files for more instructions.
-</p>
-
-
-<a name="svn"></a>
-<h3>Subversion</h3>
-<p>
-  You can retrieve a snapshot of the current development version
-  from the
-  <a href="http://sourceforge.net/p/relacs/code/HEAD/tree">Subversion repository</a> on
-  <a href="http://sourceforge.net/projects/relacs">
-    <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=199846&type=10" width="80" height="15" border="0" align="top" alt="Get Relacs at SourceForge.net. Fast, secure and Free Open Source software downloads" />
-  </a>.
-</p>
-<p>
-  Make sure you have subversion installed on your computer:
+  Use the following command to retrieve the source tree of the current
+  development version:
 </p>
 <pre>
-  sudo apt-get install subversion</pre>
-<p>
-  Use the following command to retrieve the source tree of the current development version:
-</p>
-<pre>
-  svn co svn://svn.code.sf.net/p/relacs/code/relacs/trunk relacs</pre>
+  git clone https://github.com/relacs/relacs.git relacs</pre>
 <p>
   This downloads the source files into the directory <tt>./relacs</tt>.
-  In most cases, the current version should work and is the preferred version to work with.
+  In most cases, the current version should work and is the preferred
+  version to work with.
   However, once in a while it is broken.
   Be warned! You might then give it another try a couple of days later.
 </p>
@@ -63,13 +44,30 @@
 </p>
 <p>
   You can also
-  <a href="http://sourceforge.net/p/relacs/code/HEAD/tree/relacs/trunk">browse</a>
-  the Subversion repository.
+  <a href="https://github.com/relacs/relacs">browse</a>
+  the git repository directly at <a href="https://github.com/relacs/relacs">
+    <img src="github.png" height="15" border="0" align="top" /></a>.
+</p>
+
+
+<a name="subversion"></a>
+<h3>Installation from release tar-ball</h3>
+<p>
+  Download the source-code tarball from
+  <a href="http://sourceforge.net/projects/relacs">
+    <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=199846&type=10" width="80" height="15" border="0" align="top" alt="Get Relacs at SourceForge.net. Fast, secure and Free Open Source software downloads" /></a>, 
+  unpack the relacs-xxx.tgz file and change into the
+  relacs directory:
+</p>
+<pre>
+> tar xzvf relacs-xxx.tgz
+> cd relacs-xxx</pre>
+<p>
+  Then read the <a href="../doc/readme.html">README</a> and the 
+  <a href="../doc/install.html">INSTALL</a> files for more instructions.
 </p>
 <p>
-  <a href="http://sourceforge.net/projects/relacs">
-    <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=199846&type=15" width="150" height="40" border="0" alt="Get Relacs at SourceForge.net. Fast, secure and Free Open Source software downloads" />
-  </a>
+  Note, that the releases are often quite outdated...
 </p>
 
 
@@ -88,7 +86,7 @@
 <a name="requirements"></a>
 <h3>Requirements</h3>
 <ul>
-  <li>Linux with kernel version 2.6</li>
+  <li>Linux</li>
   <li>GNU autotools</li>
   <li><a href="http://doc.trolltech.com/4.3/">Qt version 4</a> for the
     GUI</li>

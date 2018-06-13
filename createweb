@@ -4,7 +4,7 @@
 # in WEBBASE.
 # (c) 2008-2013 by Jan Benda
 
-RELACSBASE=../relacs/trunk
+RELACSBASE=../relacsgit
 WEBBASE=web
 WEBDEST=relacsweb
 
@@ -174,7 +174,7 @@ function createhtml
 	    HTMLLINE="${HTMLLINE//INSERTDATE/$(date)}"
 	    echo "$HTMLLINE"
 	fi
-    done < $WEBBASE/skeleton.html > $WEBDEST/$SRCHTML
+    done < $WEBBASE/skeleton.html > "$WEBDEST/$SRCHTML"
     IFS="$HTMLSAVEIFS"
 }
 
